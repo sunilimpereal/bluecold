@@ -19,7 +19,6 @@ class _LoginTopSectionState extends State<LoginTopSection> {
   double height = 0.5;
   @override
   Widget build(BuildContext context) {
-    log(MediaQuery.of(context).viewInsets.bottom.toString());
     return KeyboardVisibilityBuilder(
       builder: (p0, isKeyboardVisible) {
         height = isKeyboardVisible ? 0.3 : 0.5;
