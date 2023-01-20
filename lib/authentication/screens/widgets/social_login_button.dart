@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 
 class SocialLoginButton extends StatefulWidget {
@@ -22,20 +24,19 @@ class _SocialLoginButtonState extends State<SocialLoginButton> {
         elevation: 5,
         borderRadius: BorderRadius.circular(100),
         clipBehavior: Clip.hardEdge,
-        child: Ink(
-          child: InkWell(
-            onTap: () {
-              widget.onpressed();
-            },
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                image: DecorationImage(
-                  image: AssetImage(widget.image),
-                ),
-              ),
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: Ink.image(
+            height: 40,
+            width: 40,
+            padding: const EdgeInsets.all(4),
+            fit: BoxFit.fitWidth,
+            image: AssetImage(widget.image),
+            child: InkWell(
+              onTap: () {
+                widget.onpressed();
+              },
             ),
           ),
         ),
