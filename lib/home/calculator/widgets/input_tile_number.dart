@@ -35,7 +35,7 @@ class _InputTileNumberState extends State<InputTileNumber> {
 
   TextStyle activeStyle =
       const TextStyle(fontWeight: FontWeight.bold, fontSize: 18);
-  TextStyle inActiveStyle = const TextStyle();
+  TextStyle inActiveStyle = const TextStyle(color: Colors.black);
   @override
   void initState() {
     focusNode.addListener(() {
@@ -64,25 +64,36 @@ class _InputTileNumberState extends State<InputTileNumber> {
           isActive = true;
         });
       },
+      onTap: () {
+        focusNode.requestFocus();
+      },
       onLongPressUp: () {
         setState(() {
           isActive = false;
         });
       },
       child: ListTile(
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: Colors.grey.shade100.withOpacity(0.6),
+          ),
+          borderRadius: BorderRadius.circular(0.0),
+        ),
         tileColor: isActive ? Colors.blue.shade100.withOpacity(0.2) : null,
         enableFeedback: true,
         title: Text(widget.title,
             style:
                 isActive || focusNode.hasFocus ? activeStyle : inActiveStyle),
         trailing: Container(
-          width: 120,
+          width: MediaQuery.of(context).size.width * 0.35,
           alignment: Alignment.centerRight,
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Container(
-                width: 70,
+                width: MediaQuery.of(context).size.width * 0.15,
                 alignment: Alignment.centerRight,
                 child: TextField(
                   controller: _controller,

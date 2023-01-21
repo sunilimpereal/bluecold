@@ -62,7 +62,7 @@ class _CalculatorTabBarState extends State<CalculatorTabBar> {
                             AnimatedContainer(
                               duration: const Duration(milliseconds: 400),
                               width: widget.currentIndex == index
-                                  ? widget.tabs[index].length * 5
+                                  ? widget.tabs[index].length * 7
                                   : 0,
                               height: 5.5,
                               decoration: BoxDecoration(

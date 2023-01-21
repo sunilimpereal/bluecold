@@ -1,6 +1,8 @@
 import 'dart:developer';
 
-import 'package:bluecold/home/calculator/ambient_room.dart';
+import 'package:bluecold/home/calculator/ambient_room_detail.dart';
+import 'package:bluecold/home/calculator/other_detail.dart';
+import 'package:bluecold/home/calculator/product_detail.dart';
 import 'package:bluecold/home/calculator/widgets/tab_bar.dart';
 import 'package:bluecold/home/calculator/widgets/tab_bar_view.dart';
 import 'package:flutter/cupertino.dart';
@@ -32,29 +34,31 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.08,
-              child: Row(
-                children: [
-                  IconButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      icon: Icon(CupertinoIcons.back)),
-                  const Text(
-                    "Cold Room",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  )
-                ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.08,
+                child: Row(
+                  children: [
+                    IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(CupertinoIcons.back)),
+                    const Text(
+                      "Cold Room",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-            details(),
-          ],
+              details(),
+            ],
+          ),
         ),
       ),
     );
@@ -65,31 +69,37 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
     return Container(
       height: MediaQuery.of(context).size.height * 0.87,
       width: MediaQuery.of(context).size.width,
-      child: Column(children: [
-        CalculatorTabBar(
-          tabs: tabs,
-          currentIndex: currentIndex,
-          onChanged: (p0) {
-            setState(() {
-              currentIndex = p0;
-              pageController.jumpToPage(currentIndex);
-            });
-          },
-        ),
-        CalculatorTabView(
+      child: SingleChildScrollView(
+        child: Column(children: [
+          CalculatorTabBar(
+            tabs: tabs,
             currentIndex: currentIndex,
-            onPageChanged: (p0) {
+            onChanged: (p0) {
               setState(() {
-                currentIndex = p0;
+                pageController.animateToPage(p0,
+                    duration: const Duration(milliseconds: 500),
+                    curve: Curves.easeIn);
+                Future.delayed(Duration(milliseconds: 500)).then((value) {
+                  currentIndex = p0;
+                });
               });
             },
-            pageController: pageController,
-            views: [
-              AmbientRoomForm(),
-              item("product"),
-              item("other"),
-            ])
-      ]),
+          ),
+          CalculatorTabView(
+              currentIndex: currentIndex,
+              onPageChanged: (p0) {
+                setState(() {
+                  currentIndex = p0;
+                });
+              },
+              pageController: pageController,
+              views: const [
+                AmbientRoomForm(),
+                ProductDetail(),
+                OtherDetail(),
+              ])
+        ]),
+      ),
     );
   }
 
