@@ -28,7 +28,7 @@ class _LoginTopSectionState extends State<LoginTopSection> {
             duration: const Duration(milliseconds: 500),
             height: MediaQuery.of(context).size.height * height,
             width: MediaQuery.of(context).size.width,
-            color: Colors.white,
+            color: Colors.lightBlueAccent.shade200,
             child: Container(),
           ),
         );
@@ -44,11 +44,6 @@ class CustomClipperLogin extends CustomClipper<Path> {
       ..lineTo(0, size.height)
       ..lineTo(size.width, size.height - 60)
       ..lineTo(size.width, 0);
-
-    //   var path = Path()
-    //     ..moveTo(0, size.height)
-    //     ..lineTo(size.width, size.height - 30)
-    //     ..close();
     return path1;
   }
 

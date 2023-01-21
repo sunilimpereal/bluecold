@@ -1,3 +1,4 @@
+import 'package:bluecold/home/calculator/cold_room_calculator.dart';
 import 'package:bluecold/home/screen/widgets/calculator_card.dart';
 import 'package:flutter/material.dart';
 
@@ -15,14 +16,14 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
               Text(
                 "Calculators",
                 style: TextStyle(
-                  fontSize: 24,
+                  fontSize: 20,
                   fontStyle: FontStyle.italic,
                   fontWeight: FontWeight.bold,
                 ),
@@ -55,11 +56,16 @@ class _HomeScreenState extends State<HomeScreen> {
             name: "Cold \nRoom",
             color: Colors.blue.shade800,
             image: "cold-storage.png",
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const ColdRoomCalculatorScreen()));
+            },
           ),
           CalculatorCard(
             name: "Blast \nRoom",
             color: Colors.teal.shade800,
             image: "blast-room.png",
+            onTap: () {},
           ),
         ],
       ),

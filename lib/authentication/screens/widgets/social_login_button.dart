@@ -25,6 +25,7 @@ class _SocialLoginButtonState extends State<SocialLoginButton> {
         borderRadius: BorderRadius.circular(100),
         clipBehavior: Clip.hardEdge,
         color: Colors.white,
+        shadowColor: Colors.black26,
         child: Padding(
           padding: const EdgeInsets.all(4.0),
           child: Ink.image(

@@ -81,6 +81,8 @@ class _LoginScreenState extends State<LoginScreen> {
             horizontal: 14,
           ),
           shape: const StadiumBorder(),
+          elevation: 3,
+          shadowColor: Colors.lightBlue.shade100,
         ),
         onPressed: () {
           Navigator.of(context)
@@ -93,7 +95,9 @@ class _LoginScreenState extends State<LoginScreen> {
             children: const [
               Text(
                 "Login",
-                style: TextStyle(),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               SizedBox(
                 width: 8,

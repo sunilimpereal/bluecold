@@ -4,8 +4,10 @@ class CalculatorCard extends StatefulWidget {
   final Color color;
   final String image;
   final String name;
+  final Function onTap;
   const CalculatorCard({
     super.key,
+    required this.onTap,
     required this.name,
     required this.color,
     required this.image,
@@ -50,6 +52,7 @@ class _CalculatorCardState extends State<CalculatorCard>
         child: InkWell(
           onTap: () {
             _shrinkButtonSize();
+            widget.onTap();
             _restoreButtonSize();
           },
           onTapDown: (_) => _shrinkButtonSize(),
@@ -76,7 +79,7 @@ class _CalculatorCardState extends State<CalculatorCard>
                 child: Text(
                   widget.name,
                   style: const TextStyle(
-                    fontSize: 26,
+                    fontSize: 24,
                     color: Colors.white,
                   ),
                 ),
