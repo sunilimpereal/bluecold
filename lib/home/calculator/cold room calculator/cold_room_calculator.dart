@@ -1,8 +1,8 @@
 import 'dart:developer';
 
-import 'package:bluecold/home/calculator/ambient_room_detail.dart';
-import 'package:bluecold/home/calculator/other_detail.dart';
-import 'package:bluecold/home/calculator/product_detail.dart';
+import 'package:bluecold/home/calculator/cold%20room%20calculator/ambient_room_detail.dart';
+import 'package:bluecold/home/calculator/cold%20room%20calculator/other_detail.dart';
+import 'package:bluecold/home/calculator/cold%20room%20calculator/product_detail.dart';
 import 'package:bluecold/home/calculator/widgets/tab_bar.dart';
 import 'package:bluecold/home/calculator/widgets/tab_bar_view.dart';
 import 'package:flutter/cupertino.dart';
@@ -40,18 +40,33 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
               Container(
                 height: MediaQuery.of(context).size.height * 0.08,
                 child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        icon: Icon(CupertinoIcons.back)),
-                    const Text(
-                      "Cold Room",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    Row(
+                      children: [
+                        IconButton(
+                            onPressed: () {
+                              Navigator.pop(context);
+                            },
+                            icon: const Icon(CupertinoIcons.back)),
+                        const Text(
+                          "Cold Room",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(
+                            Icons.replay_rounded,
+                          ),
+                        ),
+                      ],
                     )
                   ],
                 ),
@@ -60,6 +75,13 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
             ],
           ),
         ),
+        floatingActionButton: ElevatedButton(
+          style: ElevatedButton.styleFrom(elevation: 8),
+          onPressed: () {},
+          child: const Text("Summary"),
+        ),
+        floatingActionButtonLocation:
+            FloatingActionButtonLocation.miniStartFloat,
       ),
     );
   }

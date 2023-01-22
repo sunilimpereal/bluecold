@@ -1,3 +1,5 @@
+import 'package:bluecold/authentication/screens/login.dart';
+import 'package:bluecold/home/profile/settings/settings_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -128,7 +130,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(
       children: [
         ListTile(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => const SettingsScreen(),
+              ),
+            );
+          },
           leading: const Icon(Icons.settings),
           title: const Text(
             "Settings",
@@ -138,7 +146,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
         ),
         ListTile(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushReplacement(
+              MaterialPageRoute(
+                builder: (context) => const LoginScreen(),
+              ),
+            );
+          },
           leading: Icon(
             Icons.logout,
             color: Colors.red.shade900,
