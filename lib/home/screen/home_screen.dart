@@ -1,3 +1,4 @@
+import 'package:bluecold/home/calculator/blast%20room%20calculator/blast_room_calculator.dart';
 import 'package:bluecold/home/calculator/cold_room_calculator.dart';
 import 'package:bluecold/home/screen/widgets/calculator_card.dart';
 import 'package:flutter/material.dart';
@@ -65,7 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
             name: "Blast \nRoom",
             color: Colors.teal.shade800,
             image: "blast-room.png",
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const BlastRoomCalculatorScreen()));
+            },
           ),
         ],
       ),

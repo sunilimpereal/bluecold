@@ -106,10 +106,12 @@ class _InputTileNumberState extends State<InputTileNumber> {
                   keyboardType: TextInputType.number,
                 ),
               ),
-              Text(" ${widget.unit}",
-                  style: isActive || focusNode.hasFocus
-                      ? activeStyle
-                      : inActiveStyle)
+              Text(
+                " ${widget.unit}",
+                style: isActive || focusNode.hasFocus
+                    ? activeStyle
+                    : inActiveStyle,
+              )
             ],
           ),
         ),
