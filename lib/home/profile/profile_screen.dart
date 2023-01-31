@@ -1,5 +1,11 @@
+import 'dart:developer';
+
 import 'package:bluecold/authentication/screens/login.dart';
+import 'package:bluecold/home/profile/profile_edit_screen.dart';
 import 'package:bluecold/home/profile/settings/settings_screen.dart';
+import 'package:bluecold/utils/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +18,11 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
         child: Column(
@@ -20,8 +31,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
           padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
+            children: [
+              const Text(
                 "Profile",
                 style: TextStyle(
                   fontSize: 20,
@@ -29,9 +40,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Icon(
-                Icons.edit_note,
-                color: Colors.black,
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    CupertinoPageRoute(
+                      builder: (context) => const ProfileEditScreen(),
+                    ),
+                  );
+                },
+                icon: const Icon(
+                  Icons.edit_note,
+                  color: Colors.black,
+                ),
               ),
             ],
           ),
@@ -51,15 +71,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
+          // profile image
           Container(
             width: size.width * 0.3,
             height: size.width * 0.3,
             decoration: BoxDecoration(
               color: Colors.blue,
               borderRadius: BorderRadius.circular(100),
+              image: DecorationImage(
+                image: NetworkImage(sharedPrefs.photoUrl),
+                fit: BoxFit.cover,
+              ),
             ),
           ),
-          Container(
+          // name card
+          SizedBox(
             width: size.width * 0.6,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -68,8 +94,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 //name
                 Container(
                   padding: const EdgeInsets.all(4),
-                  child: const Text(
-                    "Emma Philips",
+                  child: Text(
+                    sharedPrefs.name,
                     style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
@@ -96,11 +122,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           detailTile(
               name: "Phone",
-              detail: "6363865667",
+              detail: sharedPrefs.number,
               icon: CupertinoIcons.phone_fill),
           detailTile(
               name: "Email",
-              detail: "sunil@gmail.com",
+              detail: sharedPrefs.email,
               icon: CupertinoIcons.mail_solid),
           detailTile(
               name: "Address",
@@ -132,7 +158,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ListTile(
           onTap: () {
             Navigator.of(context).push(
-              MaterialPageRoute(
+              CupertinoPageRoute(
                 builder: (context) => const SettingsScreen(),
               ),
             );
@@ -148,7 +174,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ListTile(
           onTap: () {
             Navigator.of(context).pushReplacement(
-              MaterialPageRoute(
+              CupertinoPageRoute(
                 builder: (context) => const LoginScreen(),
               ),
             );

@@ -3,10 +3,15 @@ import 'dart:developer';
 import 'package:bluecold/home/profile/profile_screen.dart';
 import 'package:bluecold/home/screen/home_screen.dart';
 import 'package:bluecold/home/screen/widgets/bottom_nav_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../../utils/screen.dart';
+
 class HomeNavigation extends StatefulWidget {
-  const HomeNavigation({super.key});
+  const HomeNavigation({
+    super.key,
+  });
 
   @override
   State<HomeNavigation> createState() => _HomeNavigationState();
@@ -21,7 +26,7 @@ class _HomeNavigationState extends State<HomeNavigation> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Screen(
       child: Scaffold(
         body: getScreens(index),
         bottomNavigationBar: BottomNavBar(

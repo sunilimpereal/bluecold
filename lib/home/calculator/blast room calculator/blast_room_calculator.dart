@@ -3,6 +3,7 @@ import 'package:bluecold/home/calculator/blast%20room%20calculator/product_detai
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/screen.dart';
 import '../cold room calculator/ambient_room_detail.dart';
 import '../cold room calculator/other_detail.dart';
 import '../cold room calculator/product_detail.dart';
@@ -33,7 +34,7 @@ class _BlastRoomCalculatorScreenState extends State<BlastRoomCalculatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Screen(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(

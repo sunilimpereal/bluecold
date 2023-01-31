@@ -1,5 +1,8 @@
+import 'package:bluecold/home/profile/widgets/app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../../../utils/screen.dart';
 
 class SettingsScreen extends StatefulWidget {
   const SettingsScreen({super.key});
@@ -11,11 +14,11 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Screen(
       child: Scaffold(
         body: Column(
           children: [
-            appbar(context),
+            const CustomAppBar(title: "Settings"),
             Column(
               children: [
                 settingsTile(
@@ -47,33 +50,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       leading: Icon(icon),
       title: Text(title),
       trailing: const Icon(Icons.arrow_forward_ios_rounded),
-    );
-  }
-
-  SizedBox appbar(BuildContext context) {
-    return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.08,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(CupertinoIcons.back)),
-              const Text(
-                "Settings",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
     );
   }
 }

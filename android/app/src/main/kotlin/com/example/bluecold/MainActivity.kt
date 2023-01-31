@@ -1,4 +1,4 @@
-package com.example.bluecold
+package com.bc.bluecold
 
 import io.flutter.embedding.android.FlutterActivity
 

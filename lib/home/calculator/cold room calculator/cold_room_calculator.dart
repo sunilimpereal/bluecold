@@ -8,6 +8,8 @@ import 'package:bluecold/home/calculator/widgets/tab_bar_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../../utils/screen.dart';
+
 class ColdRoomCalculatorScreen extends StatefulWidget {
   const ColdRoomCalculatorScreen({super.key});
 
@@ -32,7 +34,7 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return Screen(
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(

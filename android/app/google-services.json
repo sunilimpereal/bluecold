@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "502039402338",
+    "project_id": "bluecold-75b97",
+    "storage_bucket": "bluecold-75b97.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:502039402338:android:3d286734247c769b207e3b",
+        "android_client_info": {
+          "package_name": "com.bc.bluecold"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "502039402338-i95v7fpnrdtdt07j66krh67424aq9rnc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bc.bluecold",
+            "certificate_hash": "2943b99c67a151a7f7cff3ccfaedaa28dc3a95e3"
+          }
+        },
+        {
+          "client_id": "502039402338-32rgaj65s4qdgtfbdm8m0s4nfil1ijm7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD2WlQf38cvG3_cb7BGvEPWZGzXQXZKqmA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "502039402338-32rgaj65s4qdgtfbdm8m0s4nfil1ijm7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

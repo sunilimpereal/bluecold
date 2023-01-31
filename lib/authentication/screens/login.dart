@@ -1,7 +1,15 @@
+import 'dart:developer';
+
+import 'package:bluecold/authentication/data/models/login_request_model.dart';
+import 'package:bluecold/authentication/data/repository/authRepository.dart';
+import 'package:bluecold/authentication/screens/otp_verification.dart';
 import 'package:bluecold/authentication/screens/widgets/input_field.dart';
 import 'package:bluecold/authentication/screens/widgets/login_top_section.dart';
 import 'package:bluecold/authentication/screens/widgets/social_login_button.dart';
 import 'package:bluecold/home/screen/home_navigation.dart';
+import 'package:bluecold/utils/shared_preferences.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 
@@ -13,6 +21,15 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _numberController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +38,7 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Container(
             child: Column(
               children: [
-                LoginTopSection(),
+                const LoginTopSection(),
                 input_section(context),
               ],
             ),
@@ -33,40 +50,63 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget input_section(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const AppInputField(
-            label: "Name",
-          ),
-          const AppInputField(
-            label: "Mobile",
-            textInputType: TextInputType.number,
-          ),
-          const SizedBox(
-            height: 16,
-          ),
-          Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.4,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      googleSignIn(),
-                      facebookSignIn(),
-                    ],
-                  ),
-                ),
-                signupButton(),
-              ],
+      padding: const EdgeInsets.all(4.0),
+      child: Form(
+        key: _formKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            AppInputField(
+              label: "Name",
+              onSubmitted: (value) {},
+              textEditingController: _nameController,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter name';
+                }
+                return null;
+              },
             ),
-          )
-        ],
+            AppInputField(
+              label: "Mobile",
+              textEditingController: _numberController,
+              onSubmitted: (value) {},
+              textInputType: TextInputType.number,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Please enter phone number';
+                }
+                if (value.length < 10) {
+                  return 'Please enter a valid phone number';
+                }
+
+                return null;
+              },
+            ),
+            const SizedBox(
+              height: 16,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.4,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        googleSignIn(),
+                        facebookSignIn(),
+                      ],
+                    ),
+                  ),
+                  signupButton(),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -85,8 +125,29 @@ class _LoginScreenState extends State<LoginScreen> {
           shadowColor: Colors.lightBlue.shade100,
         ),
         onPressed: () {
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) => HomeNavigation()));
+          if (_formKey.currentState!.validate()) {
+            AuthRepository()
+                .loginWithNumber(LoginRequest(
+                    socialId: _numberController.text,
+                    contact: _numberController.text,
+                    name: _nameController.text,
+                    email: ""))
+                .then((value) {
+              sharedPrefs.setUserDetails(
+                id: value?.user.id.toString() ?? '',
+                email: value?.user.email ?? '',
+                name: value?.user.name ?? '',
+                number: value?.user.contact ?? '',
+                address: value?.user.address ?? '',
+                company: value?.user.companyName ?? '',
+                photoUrl: value?.user.imageUrl ?? '',
+              );
+              Navigator.of(context).push(CupertinoPageRoute(
+                  builder: (context) => OtpVerificationScreen(
+                        otp: value!.otp.toString(),
+                      )));
+            });
+          }
         },
         child: Container(
           width: MediaQuery.of(context).size.width * 0.4,
@@ -112,7 +173,22 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget googleSignIn() {
     return SocialLoginButton(
-      onpressed: () {},
+      onpressed: () {
+        AuthRepository().signInWithGoogle().then((user) {
+          sharedPrefs.setUserDetails(
+            id: user.user?.uid ?? '',
+            email: user.user?.email ?? '',
+            name: user.user?.displayName ?? '',
+            number: user.user?.phoneNumber ?? '',
+            address: '',
+            company: '',
+            photoUrl: user.user?.photoURL ?? '',
+          );
+
+          Navigator.of(context)
+              .push(CupertinoPageRoute(builder: (context) => HomeNavigation()));
+        });
+      },
       image: "assets/images/google_logo.png",
     );
   }
