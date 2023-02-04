@@ -10,12 +10,14 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 
+import '../../../utils/ApiUrls.dart';
+
 class AuthRepository {
   //login with number and otp
   Future<LoginResponse?> loginWithNumber(LoginRequest loginRequest) async {
     LoginResponse? loginResponse =
         await ApiRequest<LoginRequest, LoginResponse>().post(
-            url: urls.login,
+            url: ApiUrls.login,
             request: loginRequest,
             reponseFromJson: loginResponseFromJson,
             requestToJson: loginRequestToJson);

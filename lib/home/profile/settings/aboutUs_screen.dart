@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
+import '../../../utils/screen.dart';
+import '../widgets/app_bar.dart';
 
 class AboutUsScreen extends StatefulWidget {
   const AboutUsScreen({super.key});
@@ -12,6 +12,15 @@ class AboutUsScreen extends StatefulWidget {
 class _AboutUsScreenState extends State<AboutUsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Screen(
+        child: Scaffold(
+      body: Column(
+        children: const [
+          CustomAppBar(
+            title: "Disclaimer",
+          ),
+        ],
+      ),
+    ));
   }
 }

@@ -5,10 +5,12 @@ import 'package:flutter/services.dart';
 class InputTileOption extends StatefulWidget {
   final String title;
   final List<String> options;
+  final Function(String)? onChanged;
   const InputTileOption({
     super.key,
     required this.title,
     required this.options,
+    this.onChanged,
   });
 
   @override
@@ -17,8 +19,7 @@ class InputTileOption extends StatefulWidget {
 
 class _InputTileOptionState extends State<InputTileOption> {
   bool isActive = false;
-  TextStyle activeStyle =
-      const TextStyle(fontWeight: FontWeight.bold, fontSize: 18);
+  TextStyle activeStyle = const TextStyle(fontWeight: FontWeight.bold, fontSize: 18);
   TextStyle inActiveStyle = const TextStyle(color: Colors.black);
 
   @override
@@ -51,8 +52,7 @@ class _InputTileOptionState extends State<InputTileOption> {
             ),
             tileColor: isActive ? Colors.blue.shade100.withOpacity(0.2) : null,
             enableFeedback: true,
-            title: Text(widget.title,
-                style: isActive ? activeStyle : inActiveStyle),
+            title: Text(widget.title, style: isActive ? activeStyle : inActiveStyle),
             // scroll selector
             trailing: Container(
               height: 33,
@@ -63,7 +63,9 @@ class _InputTileOptionState extends State<InputTileOption> {
                 magnification: 1.1,
                 itemExtent: 33,
                 diameterRatio: 500,
-                onSelectedItemChanged: (value) {},
+                onSelectedItemChanged: (value) {
+                  widget.onChanged!(widget.options[value]);
+                },
                 children: widget.options.map((e) => text(e)).toList(),
               ),
             ),

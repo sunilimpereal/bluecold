@@ -53,15 +53,15 @@ class User {
 
   int id;
   String name;
-  String companyName;
-  dynamic imageUrl;
-  String address;
-  String email;
+  String? companyName;
+  String? imageUrl;
+  String? address;
+  String? email;
   String contact;
-  String os;
-  String osVersion;
-  String applicationVersion;
-  String deviceId;
+  String? os;
+  String? osVersion;
+  String? applicationVersion;
+  String? deviceId;
   String socialId;
   int isActive;
   DateTime createdon;

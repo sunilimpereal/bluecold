@@ -1,3 +1,4 @@
+import 'package:bluecold/home/profile/settings/disclaimer_screen.dart';
 import 'package:bluecold/home/profile/widgets/app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
             Column(
               children: [
                 settingsTile(
-                    ontap: () {},
+                    ontap: () {
+                      Navigator.of(context).push(
+                        CupertinoPageRoute(
+                          builder: (context) => const DisclaimerScreen(),
+                        ),
+                      );
+                    },
                     icon: Icons.rule_rounded,
                     title: "Disclaimer"),
                 settingsTile(

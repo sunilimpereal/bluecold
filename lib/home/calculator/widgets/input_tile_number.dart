@@ -11,6 +11,7 @@ class InputTileNumber extends StatefulWidget {
   final double maxValue;
   final double gapValue;
   final String unit;
+  final Function(String)? onChanged;
   const InputTileNumber({
     super.key,
     required this.title,
@@ -19,6 +20,7 @@ class InputTileNumber extends StatefulWidget {
     required this.maxValue,
     required this.minValue,
     required this.unit,
+    this.onChanged,
   });
 
   @override
@@ -33,8 +35,7 @@ class _InputTileNumberState extends State<InputTileNumber> {
   double percentage = 0;
   bool isActive = false;
 
-  TextStyle activeStyle =
-      const TextStyle(fontWeight: FontWeight.bold, fontSize: 18);
+  TextStyle activeStyle = const TextStyle(fontWeight: FontWeight.bold, fontSize: 18);
   TextStyle inActiveStyle = const TextStyle(color: Colors.black);
   @override
   void initState() {
@@ -42,6 +43,11 @@ class _InputTileNumberState extends State<InputTileNumber> {
       setState(() {});
     });
     _controller.text = widget.initialValue.ceil().toString();
+
+    _controller.addListener(() {
+      widget.onChanged!(_controller.text);
+      log(_controller.text);
+    });
     super.initState();
   }
 
@@ -51,11 +57,10 @@ class _InputTileNumberState extends State<InputTileNumber> {
       onLongPressMoveUpdate: (details) {
         // log(details.offsetFromOrigin.toString());
         setState(() {
-          percentage = ((details.localPosition.dx /
-              MediaQuery.of(context).size.width *
-              1.2));
+          percentage = ((details.localPosition.dx / MediaQuery.of(context).size.width * 1.2));
           value = (widget.maxValue * percentage).ceil();
           _controller.text = value.toString();
+          widget.onChanged!(_controller.text);
         });
       },
       onLongPress: () {
@@ -81,9 +86,7 @@ class _InputTileNumberState extends State<InputTileNumber> {
         ),
         tileColor: isActive ? Colors.blue.shade100.withOpacity(0.2) : null,
         enableFeedback: true,
-        title: Text(widget.title,
-            style:
-                isActive || focusNode.hasFocus ? activeStyle : inActiveStyle),
+        title: Text(widget.title, style: isActive || focusNode.hasFocus ? activeStyle : inActiveStyle),
         trailing: Container(
           width: MediaQuery.of(context).size.width * 0.35,
           alignment: Alignment.centerRight,
@@ -97,20 +100,19 @@ class _InputTileNumberState extends State<InputTileNumber> {
                 alignment: Alignment.centerRight,
                 child: TextField(
                   controller: _controller,
+                  onChanged: ((value) {
+                    widget.onChanged == null ? null : widget.onChanged!(_controller.text);
+                  }),
                   focusNode: focusNode,
                   textAlign: TextAlign.end,
-                  style: isActive || focusNode.hasFocus
-                      ? activeStyle
-                      : inActiveStyle,
+                  style: isActive || focusNode.hasFocus ? activeStyle : inActiveStyle,
                   decoration: const InputDecoration(border: InputBorder.none),
                   keyboardType: TextInputType.number,
                 ),
               ),
               Text(
                 " ${widget.unit}",
-                style: isActive || focusNode.hasFocus
-                    ? activeStyle
-                    : inActiveStyle,
+                style: isActive || focusNode.hasFocus ? activeStyle : inActiveStyle,
               )
             ],
           ),

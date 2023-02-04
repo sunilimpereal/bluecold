@@ -1,6 +1,7 @@
 import 'package:bluecold/authentication/screens/login.dart';
 import 'package:bluecold/theme/theme1.dart';
 import 'package:bluecold/utils/ApiUrls.dart';
+import 'package:bluecold/utils/sharedpref_coldroom.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +11,13 @@ import 'utils/shared_preferences.dart';
 late FirebaseAuth firebaseAuth;
 ApiUrls urls = ApiUrls();
 SharedPref sharedPref = SharedPref();
+SharedPrefColdRoom sharedPrefColdRoom = SharedPrefColdRoom();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await sharedPref.init();
+  await sharedPrefColdRoom.init();
+
   runApp(MyApp());
 }
 

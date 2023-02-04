@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/ambient_room_detail.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/other_detail.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/product_detail.dart';
+import 'package:bluecold/home/calculator/cold%20room%20calculator/result_screen.dart';
 import 'package:bluecold/home/calculator/widgets/tab_bar.dart';
 import 'package:bluecold/home/calculator/widgets/tab_bar_view.dart';
 import 'package:flutter/cupertino.dart';
@@ -79,7 +80,13 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
         ),
         floatingActionButton: ElevatedButton(
           style: ElevatedButton.styleFrom(elevation: 8),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(
+              CupertinoPageRoute(
+                builder: (context) => const ResultScreen(),
+              ),
+            );
+          },
           child: const Text("Summary"),
         ),
         floatingActionButtonLocation:
