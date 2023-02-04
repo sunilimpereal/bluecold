@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:bluecold/home/profile/widgets/app_bar.dart';
 import 'package:bluecold/home/screen/home_navigation.dart';
-import 'package:bluecold/home/screen/home_screen.dart';
 import 'package:bluecold/utils/screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +30,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
       child: Scaffold(
         body: Column(
           children: [
-            CustomAppBar(title: ""),
+            const CustomAppBar(title: ""),
             Container(
               padding: const EdgeInsets.all(16),
               child: Column(
@@ -82,10 +79,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     );
   }
 
-  Widget otpField(
-      {required TextEditingController otpNumberController,
-      bool isFirst = false,
-      bool isLast = false}) {
+  Widget otpField({required TextEditingController otpNumberController, bool isFirst = false, bool isLast = false}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -114,14 +108,8 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 }
               },
               decoration: const InputDecoration(
-                  isDense: true,
-                  border: InputBorder.none,
-                  focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(width: 4, color: Colors.blue))),
-              inputFormatters: [
-                LengthLimitingTextInputFormatter(1),
-                FilteringTextInputFormatter.digitsOnly
-              ],
+                  isDense: true, border: InputBorder.none, focusedBorder: UnderlineInputBorder(borderSide: BorderSide(width: 4, color: Colors.blue))),
+              inputFormatters: [LengthLimitingTextInputFormatter(1), FilteringTextInputFormatter.digitsOnly],
             ),
           ),
         ),
@@ -130,11 +118,9 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   }
 
   void _validate() {
-    String otp =
-        otp1.text + otp2.text + otp3.text + otp4.text + otp5.text + otp6.text;
+    String otp = otp1.text + otp2.text + otp3.text + otp4.text + otp5.text + otp6.text;
     if (widget.otp == otp) {
-      Navigator.of(context)
-          .push(CupertinoPageRoute(builder: (context) => HomeNavigation()));
+      Navigator.of(context).push(CupertinoPageRoute(builder: (context) => const HomeNavigation()));
     }
   }
 }

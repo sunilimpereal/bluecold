@@ -17,8 +17,7 @@ class CalculatorCard extends StatefulWidget {
   State<CalculatorCard> createState() => _CalculatorCardState();
 }
 
-class _CalculatorCardState extends State<CalculatorCard>
-    with SingleTickerProviderStateMixin {
+class _CalculatorCardState extends State<CalculatorCard> with SingleTickerProviderStateMixin {
   static const clickAnimationDuration = 100;
   double _scaleTransformValue = 1;
 
@@ -57,13 +56,12 @@ class _CalculatorCardState extends State<CalculatorCard>
           },
           onTapDown: (_) => _shrinkButtonSize(),
           onTapCancel: _restoreButtonSize,
-          child: Container(
-              child: Stack(
+          child: Stack(
             children: [
               Positioned(
                   top: 25,
                   right: -50,
-                  child: Container(
+                  child: SizedBox(
                     width: 160,
                     height: 160,
                     child: Opacity(
@@ -85,7 +83,7 @@ class _CalculatorCardState extends State<CalculatorCard>
                 ),
               )),
             ],
-          )),
+          ),
         ),
       ),
     );
@@ -102,7 +100,6 @@ class _CalculatorCardState extends State<CalculatorCard>
   }
 
   _restoreButtonSize() {
-    Future.delayed(Duration(milliseconds: clickAnimationDuration),
-        () => animationController.reverse());
+    Future.delayed(const Duration(milliseconds: clickAnimationDuration), () => animationController.reverse());
   }
 }

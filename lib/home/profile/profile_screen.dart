@@ -1,11 +1,8 @@
-import 'dart:developer';
-
 import 'package:bluecold/authentication/screens/login.dart';
 import 'package:bluecold/home/profile/profile_edit_screen.dart';
 import 'package:bluecold/home/profile/settings/settings_screen.dart';
 import 'package:bluecold/utils/shared_preferences.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -24,11 +21,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        child: Column(
+    return Column(
       children: [
         Container(
-          padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -60,12 +56,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
         detailSection(),
         buttons()
       ],
-    ));
+    );
   }
 
   Widget nameSection() {
     Size size = MediaQuery.of(context).size;
-    return Container(
+    return SizedBox(
       width: size.width,
       height: size.height * 0.2,
       child: Row(
@@ -96,7 +92,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding: const EdgeInsets.all(4),
                   child: Text(
                     sharedPrefs.name,
-                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                   ),
                 ),
                 //comapny name
@@ -116,30 +112,19 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget detailSection() {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.4,
       child: ListView(
         children: [
-          detailTile(
-              name: "Phone",
-              detail: sharedPrefs.number,
-              icon: CupertinoIcons.phone_fill),
-          detailTile(
-              name: "Email",
-              detail: sharedPrefs.email,
-              icon: CupertinoIcons.mail_solid),
-          detailTile(
-              name: "Address",
-              detail:
-                  "Lorem Ipsum sit amet, consectetur elit, sed do incididunt ut",
-              icon: CupertinoIcons.location_solid)
+          detailTile(name: "Phone", detail: sharedPrefs.number, icon: CupertinoIcons.phone_fill),
+          detailTile(name: "Email", detail: sharedPrefs.email, icon: CupertinoIcons.mail_solid),
+          detailTile(name: "Address", detail: "Lorem Ipsum sit amet, consectetur elit, sed do incididunt ut", icon: CupertinoIcons.location_solid)
         ],
       ),
     );
   }
 
-  Widget detailTile(
-      {required String name, required String detail, required IconData icon}) {
+  Widget detailTile({required String name, required String detail, required IconData icon}) {
     return ListTile(
       leading: Column(
         mainAxisAlignment: MainAxisAlignment.center,

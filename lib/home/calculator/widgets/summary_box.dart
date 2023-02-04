@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class SummaryBox extends StatefulWidget {
@@ -62,12 +59,10 @@ class _SummaryBoxState extends State<SummaryBox> {
   }
 
   Widget detailList() {
-    return Container(
-      child: Column(
-          children: widget.summaryBoxItems.map((e) {
-        return DetailItem(summaryBoxItem: e);
-      }).toList()),
-    );
+    return Column(
+        children: widget.summaryBoxItems.map((e) {
+      return DetailItem(summaryBoxItem: e);
+    }).toList());
   }
 }
 

@@ -1,14 +1,11 @@
-import 'dart:developer';
-
 import 'package:bluecold/authentication/data/models/login_request_model.dart';
-import 'package:bluecold/authentication/data/repository/authRepository.dart';
+import 'package:bluecold/authentication/data/repository/auth_repository.dart';
 import 'package:bluecold/authentication/screens/otp_verification.dart';
 import 'package:bluecold/authentication/screens/widgets/input_field.dart';
 import 'package:bluecold/authentication/screens/widgets/login_top_section.dart';
 import 'package:bluecold/authentication/screens/widgets/social_login_button.dart';
 import 'package:bluecold/home/screen/home_navigation.dart';
 import 'package:bluecold/utils/shared_preferences.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
@@ -35,20 +32,18 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: KeyboardDismissOnTap(
         child: Center(
-          child: Container(
-            child: Column(
-              children: [
-                const LoginTopSection(),
-                input_section(context),
-              ],
-            ),
+          child: Column(
+            children: [
+              const LoginTopSection(),
+              inputSection(context),
+            ],
           ),
         ),
       ),
     );
   }
 
-  Widget input_section(BuildContext context) {
+  Widget inputSection(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(4.0),
       child: Form(
@@ -91,7 +86,7 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width * 0.4,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -127,11 +122,8 @@ class _LoginScreenState extends State<LoginScreen> {
         onPressed: () {
           if (_formKey.currentState!.validate()) {
             AuthRepository()
-                .loginWithNumber(LoginRequest(
-                    socialId: _numberController.text,
-                    contact: _numberController.text,
-                    name: _nameController.text,
-                    email: ""))
+                .loginWithNumber(
+                    LoginRequest(socialId: _numberController.text, contact: _numberController.text, name: _nameController.text, email: ""))
                 .then((value) {
               sharedPrefs.setUserDetails(
                 id: value?.user.id.toString() ?? '',
@@ -149,7 +141,7 @@ class _LoginScreenState extends State<LoginScreen> {
             });
           }
         },
-        child: Container(
+        child: SizedBox(
           width: MediaQuery.of(context).size.width * 0.4,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -185,8 +177,7 @@ class _LoginScreenState extends State<LoginScreen> {
             photoUrl: user.user?.photoURL ?? '',
           );
 
-          Navigator.of(context)
-              .push(CupertinoPageRoute(builder: (context) => HomeNavigation()));
+          Navigator.of(context).push(CupertinoPageRoute(builder: (context) => const HomeNavigation()));
         });
       },
       image: "assets/images/google_logo.png",

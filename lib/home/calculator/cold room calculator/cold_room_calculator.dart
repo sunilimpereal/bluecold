@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bluecold/home/calculator/cold%20room%20calculator/ambient_room_detail.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/other_detail.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/product_detail.dart';
@@ -15,8 +13,7 @@ class ColdRoomCalculatorScreen extends StatefulWidget {
   const ColdRoomCalculatorScreen({super.key});
 
   @override
-  State<ColdRoomCalculatorScreen> createState() =>
-      _ColdRoomCalculatorScreenState();
+  State<ColdRoomCalculatorScreen> createState() => _ColdRoomCalculatorScreenState();
 }
 
 class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
@@ -40,7 +37,7 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 height: MediaQuery.of(context).size.height * 0.08,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -89,15 +86,13 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
           },
           child: const Text("Summary"),
         ),
-        floatingActionButtonLocation:
-            FloatingActionButtonLocation.miniStartFloat,
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
       ),
     );
   }
 
   Widget details() {
-    Size size = MediaQuery.of(context).size;
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.87,
       width: MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
@@ -107,10 +102,8 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
             currentIndex: currentIndex,
             onChanged: (p0) {
               setState(() {
-                pageController.animateToPage(p0,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeIn);
-                Future.delayed(Duration(milliseconds: 500)).then((value) {
+                pageController.animateToPage(p0, duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
+                Future.delayed(const Duration(milliseconds: 500)).then((value) {
                   currentIndex = p0;
                 });
               });
@@ -135,8 +128,6 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
   }
 
   Widget item(String name) {
-    return Container(
-      child: Center(child: Text(name)),
-    );
+    return Center(child: Text(name));
   }
 }

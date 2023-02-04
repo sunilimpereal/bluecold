@@ -22,8 +22,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
     companyController.text = "Blue Cold";
     phoneController.text = "6363865667";
     emailController.text = "sunil@gmail.com";
-    addressController.text =
-        "Lorem Ipsum sit amet, consectetur elit, sed do incididunt ut";
+    addressController.text = "Lorem Ipsum sit amet, consectetur elit, sed do incididunt ut";
     super.initState();
   }
 
@@ -103,7 +102,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
       leading: Icon(leagingIconData),
       title: TextField(
         controller: textEditingController,
-        decoration: InputDecoration(isDense: true),
+        decoration: const InputDecoration(isDense: true),
       ),
       subtitle: Padding(
         padding: const EdgeInsets.all(8.0),

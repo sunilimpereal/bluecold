@@ -13,8 +13,7 @@ class FormSection extends StatefulWidget {
   State<FormSection> createState() => _FormSectionState();
 }
 
-class _FormSectionState extends State<FormSection>
-    with SingleTickerProviderStateMixin {
+class _FormSectionState extends State<FormSection> with SingleTickerProviderStateMixin {
   bool isOpen = true;
   late AnimationController _controller;
   @override
@@ -29,7 +28,7 @@ class _FormSectionState extends State<FormSection>
   @override
   Widget build(BuildContext context) {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       child: Column(
         children: [
           GestureDetector(
@@ -55,9 +54,7 @@ class _FormSectionState extends State<FormSection>
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Icon(
-                      isOpen
-                          ? Icons.keyboard_arrow_up
-                          : Icons.keyboard_arrow_down,
+                      isOpen ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
                     ),
                   )
                 ],
@@ -66,9 +63,6 @@ class _FormSectionState extends State<FormSection>
           ),
           isOpen
               ? AnimatedBuilder(
-                  child: Column(
-                    children: widget.formItems,
-                  ),
                   animation: _controller,
                   builder: (context, child) {
                     return FadeTransition(
@@ -76,6 +70,9 @@ class _FormSectionState extends State<FormSection>
                       child: child,
                     );
                   },
+                  child: Column(
+                    children: widget.formItems,
+                  ),
                   // builder: (BuildContext context, Widget child) {
                   //   return Transform.rotate(
                   //     angle: _controller.value * 2.2 * math.pi,

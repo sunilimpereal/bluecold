@@ -1,17 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:developer';
-import 'dart:ffi';
-
-import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPrefColdRoom {
   static SharedPreferences? _sharedPref;
   init() async {
-    if (_sharedPref == null) {
-      _sharedPref = await SharedPreferences.getInstance();
-    }
+    _sharedPref ??= await SharedPreferences.getInstance();
   }
 
   // name values
@@ -25,6 +19,15 @@ class SharedPrefColdRoom {
   String Insulation = "insulation";
   String AmbTemp = "ambTemp";
   String AmbRH = "ambRH";
+  String ProductFamily = "ProductFamily";
+  String ProductProduct = "ProductProduct";
+  String StorageDensity = "StorageDensity";
+  String Quantity = "Quantity";
+  String DailyLoadPerc = "DailyLoadPerc";
+  String DailyLoading = "DailyLoading";
+  String ProductIncTemp = "ProductIncTemp";
+  String ProductFinalTemp = "ProductFinalTemp";
+  String CoolingTime = "CoolingTime";
 
   //getters
   double get externalLength => _sharedPref!.getDouble(ExternalLength) ?? 0.0;
@@ -37,6 +40,16 @@ class SharedPrefColdRoom {
   String get insulation => _sharedPref!.getString(Insulation) ?? "";
   double get ambTemp => _sharedPref!.getDouble(AmbTemp) ?? 0.0;
   String get ambRH => _sharedPref!.getString(AmbRH) ?? "";
+
+  String get productFamily => _sharedPref!.getString(ProductFamily) ?? "";
+  String get productProduct => _sharedPref!.getString(ProductProduct) ?? "";
+  double get storageDensity => _sharedPref!.getDouble(StorageDensity) ?? 0.0;
+  double get quantity => _sharedPref!.getDouble(Quantity) ?? 0.0;
+  double get dailyLoadPerc => _sharedPref!.getDouble(DailyLoadPerc) ?? 0.0;
+  double get dailyLoading => _sharedPref!.getDouble(DailyLoading) ?? 0.0;
+  double get productIncTemp => _sharedPref!.getDouble(ProductIncTemp) ?? 0.0;
+  double get productFinalTemp => _sharedPref!.getDouble(ProductFinalTemp) ?? 0.0;
+  double get coolingTime => _sharedPref!.getDouble(CoolingTime) ?? 0.0;
 
   //setters
   setExternalWidth(double value) {
@@ -77,6 +90,42 @@ class SharedPrefColdRoom {
 
   setAmbRH(String value) {
     _sharedPref!.setString(AmbRH, value);
+  }
+
+  setProductFamily(String value) {
+    _sharedPref!.setString(ProductFamily, value);
+  }
+
+  setProductProduct(String value) {
+    _sharedPref!.setString(ProductProduct, value);
+  }
+
+  setStorageDensity(double value) {
+    _sharedPref!.setDouble(StorageDensity, value);
+  }
+
+  setQuantity(double value) {
+    _sharedPref!.setDouble(Quantity, value);
+  }
+
+  setDailyLoadPerc(double value) {
+    _sharedPref!.setDouble(DailyLoadPerc, value);
+  }
+
+  setDailyLoading(double value) {
+    _sharedPref!.setDouble(DailyLoading, value);
+  }
+
+  setProductIncTemp(double value) {
+    _sharedPref!.setDouble(ProductIncTemp, value);
+  }
+
+  setProductFinalTemp(double value) {
+    _sharedPref!.setDouble(ProductFinalTemp, value);
+  }
+
+  setCoolingTime(double value) {
+    _sharedPref!.setDouble(CoolingTime, value);
   }
 }
 

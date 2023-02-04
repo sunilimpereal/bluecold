@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:bluecold/home/profile/profile_screen.dart';
 import 'package:bluecold/home/screen/home_screen.dart';
 import 'package:bluecold/home/screen/widgets/bottom_nav_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/screen.dart';
@@ -47,12 +46,12 @@ class _HomeNavigationState extends State<HomeNavigation> {
   Widget getScreens(int i) {
     switch (i) {
       case 0:
-        return HomeScreen();
+        return const HomeScreen();
       case 1:
-        return ProfileScreen();
+        return const ProfileScreen();
 
       default:
-        return HomeScreen();
+        return const HomeScreen();
     }
   }
 }

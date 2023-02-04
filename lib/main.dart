@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bluecold/authentication/screens/login.dart';
 import 'package:bluecold/theme/theme1.dart';
 import 'package:bluecold/utils/ApiUrls.dart';
@@ -18,7 +20,7 @@ void main() async {
   await sharedPref.init();
   await sharedPrefColdRoom.init();
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -32,9 +34,9 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
-        print('User is currently signed out!');
+        log('User is currently signed out!');
       } else {
-        print('User is signed in!');
+        log('User is signed in!');
       }
     });
     super.initState();

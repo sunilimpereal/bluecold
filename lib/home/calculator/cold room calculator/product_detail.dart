@@ -1,6 +1,7 @@
 import 'package:bluecold/home/calculator/widgets/form_section.dart';
 import 'package:bluecold/home/calculator/widgets/input_tile_number.dart';
 import 'package:bluecold/home/calculator/widgets/input_tile_option.dart';
+import 'package:bluecold/main.dart';
 import 'package:flutter/material.dart';
 
 class ProductDetail extends StatefulWidget {
@@ -15,13 +16,13 @@ class ProductDetailState extends State<ProductDetail> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Column(
-        children: const [
+        children: [
           FormSection(
             title: "Produt Detail",
             formItems: [
               InputTileOption(
                 title: "Family",
-                options: [
+                options: const [
                   "Beef",
                   "Candy",
                   "Diary Products",
@@ -36,13 +37,19 @@ class ProductDetailState extends State<ProductDetail> {
                   "Sausage",
                   "Vegetables",
                 ],
+                onChanged: (value) {
+                  sharedPrefColdRoom.setProductFamily(value);
+                },
               ),
               InputTileOption(
                 title: "Product",
-                options: [
+                options: const [
                   "Vegetables-Mean",
                   "",
                 ],
+                onChanged: (value) {
+                  sharedPrefColdRoom.setProductProduct(value);
+                },
               ),
               InputTileNumber(
                 title: "Storage Density",
@@ -51,6 +58,9 @@ class ProductDetailState extends State<ProductDetail> {
                 minValue: 1,
                 gapValue: 5,
                 unit: "kg/m3",
+                onChanged: (value) {
+                  sharedPrefColdRoom.setStorageDensity(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Quantity",
@@ -59,6 +69,9 @@ class ProductDetailState extends State<ProductDetail> {
                 minValue: 1,
                 gapValue: 5,
                 unit: "kg",
+                onChanged: (value) {
+                  sharedPrefColdRoom.setQuantity(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Daily Loading Percentage",
@@ -67,6 +80,9 @@ class ProductDetailState extends State<ProductDetail> {
                 minValue: 1,
                 gapValue: 5,
                 unit: "%",
+                onChanged: (value) {
+                  sharedPrefColdRoom.setDailyLoadPerc(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Product Incoming Temp",
@@ -75,6 +91,9 @@ class ProductDetailState extends State<ProductDetail> {
                 minValue: 1,
                 gapValue: 5,
                 unit: "°C",
+                onChanged: (value) {
+                  sharedPrefColdRoom.setProductIncTemp(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Product Final Temp",
@@ -83,6 +102,9 @@ class ProductDetailState extends State<ProductDetail> {
                 minValue: 1,
                 gapValue: 5,
                 unit: "°C",
+                onChanged: (value) {
+                  sharedPrefColdRoom.setProductFinalTemp(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Cooling time",
@@ -91,6 +113,9 @@ class ProductDetailState extends State<ProductDetail> {
                 minValue: 1,
                 gapValue: 5,
                 unit: "hrs",
+                onChanged: (value) {
+                  sharedPrefColdRoom.setCoolingTime(double.parse(value));
+                },
               ),
             ],
           )

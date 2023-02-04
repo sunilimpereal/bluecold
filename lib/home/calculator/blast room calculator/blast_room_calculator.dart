@@ -5,8 +5,7 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/screen.dart';
 import '../cold room calculator/ambient_room_detail.dart';
-import '../cold room calculator/other_detail.dart';
-import '../cold room calculator/product_detail.dart';
+
 import '../widgets/tab_bar.dart';
 import '../widgets/tab_bar_view.dart';
 
@@ -14,8 +13,7 @@ class BlastRoomCalculatorScreen extends StatefulWidget {
   const BlastRoomCalculatorScreen({super.key});
 
   @override
-  State<BlastRoomCalculatorScreen> createState() =>
-      _BlastRoomCalculatorScreenState();
+  State<BlastRoomCalculatorScreen> createState() => _BlastRoomCalculatorScreenState();
 }
 
 class _BlastRoomCalculatorScreenState extends State<BlastRoomCalculatorScreen> {
@@ -39,7 +37,7 @@ class _BlastRoomCalculatorScreenState extends State<BlastRoomCalculatorScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              Container(
+              SizedBox(
                 height: MediaQuery.of(context).size.height * 0.08,
                 child: Row(
                   children: [
@@ -47,7 +45,7 @@ class _BlastRoomCalculatorScreenState extends State<BlastRoomCalculatorScreen> {
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        icon: Icon(CupertinoIcons.back)),
+                        icon: const Icon(CupertinoIcons.back)),
                     const Text(
                       "Blast Room",
                       style: TextStyle(
@@ -67,8 +65,7 @@ class _BlastRoomCalculatorScreenState extends State<BlastRoomCalculatorScreen> {
   }
 
   Widget details() {
-    Size size = MediaQuery.of(context).size;
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.87,
       width: MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
@@ -78,9 +75,7 @@ class _BlastRoomCalculatorScreenState extends State<BlastRoomCalculatorScreen> {
             currentIndex: currentIndex,
             onChanged: (p0) {
               setState(() {
-                pageController.animateToPage(p0,
-                    duration: const Duration(milliseconds: 500),
-                    curve: Curves.easeIn);
+                pageController.animateToPage(p0, duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
                 Future.delayed(const Duration(milliseconds: 500)).then((value) {
                   currentIndex = p0;
                 });

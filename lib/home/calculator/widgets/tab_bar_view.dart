@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 class CalculatorTabView extends StatefulWidget {
@@ -27,7 +25,7 @@ class CalculatorTabViewState extends State<CalculatorTabView> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height * 0.8,
       child: PageView.builder(

@@ -78,7 +78,7 @@ class _InputTileOptionState extends State<InputTileOption> {
   Widget text(String text) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: Container(
+      child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.33,
         child: Text(
           text,

@@ -19,7 +19,7 @@ class _CalculatorTabBarState extends State<CalculatorTabBar> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
+    return SizedBox(
       width: size.width,
       height: size.height * 0.07,
       child: Stack(
@@ -46,24 +46,17 @@ class _CalculatorTabBarState extends State<CalculatorTabBar> {
                           children: [
                             Padding(
                               padding: EdgeInsets.symmetric(
-                                horizontal:
-                                    widget.currentIndex == index ? 10 : 8.0,
+                                horizontal: widget.currentIndex == index ? 10 : 8.0,
                                 vertical: 8,
                               ),
                               child: Text(
                                 widget.tabs[index],
-                                style: widget.currentIndex == index
-                                    ? const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 16)
-                                    : const TextStyle(),
+                                style: widget.currentIndex == index ? const TextStyle(fontWeight: FontWeight.bold, fontSize: 16) : const TextStyle(),
                               ),
                             ),
                             AnimatedContainer(
                               duration: const Duration(milliseconds: 400),
-                              width: widget.currentIndex == index
-                                  ? widget.tabs[index].length * 7
-                                  : 0,
+                              width: widget.currentIndex == index ? widget.tabs[index].length * 7 : 0,
                               height: 5.5,
                               decoration: BoxDecoration(
                                 color: Colors.blue,

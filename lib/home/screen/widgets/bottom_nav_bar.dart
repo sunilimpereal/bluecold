@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 class BottomNavBar extends StatefulWidget {
   final Function(int) onChanged;
   final int currentIndex;
-  const BottomNavBar(
-      {super.key, required this.onChanged, required this.currentIndex});
+  const BottomNavBar({super.key, required this.onChanged, required this.currentIndex});
 
   @override
   State<BottomNavBar> createState() => _BottomNavBarState();

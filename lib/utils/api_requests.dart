@@ -1,9 +1,7 @@
 import 'dart:developer';
 
-import 'package:bluecold/main.dart';
 import 'package:bluecold/utils/ApiUrls.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 
 class ApiRequest<ReqModel, ResModel> {
   Map<String, String> requestHeaders = {

@@ -22,7 +22,6 @@ class AppInputField extends StatefulWidget {
 class _AppInputFieldState extends State<AppInputField> {
   @override
   Widget build(BuildContext context) {
-    //TODO:
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
       child: TextFormField(

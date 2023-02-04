@@ -1,8 +1,6 @@
 import 'package:bluecold/home/profile/widgets/app_bar.dart';
 import 'package:bluecold/utils/screen.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class DisclaimerScreen extends StatefulWidget {
   const DisclaimerScreen({super.key});
