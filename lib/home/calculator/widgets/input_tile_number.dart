@@ -27,7 +27,7 @@ class InputTileNumber extends StatefulWidget {
 }
 
 class _InputTileNumberState extends State<InputTileNumber> {
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   FocusNode focusNode = FocusNode();
   bool hasFocus = false;
   int value = 5;

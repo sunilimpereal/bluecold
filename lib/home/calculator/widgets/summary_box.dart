@@ -79,8 +79,10 @@ class DetailItem extends StatefulWidget {
 
 class _DetailItemState extends State<DetailItem> {
   bool bold = false;
-  TextStyle active = const TextStyle(fontWeight: FontWeight.bold, fontSize: 16);
-  TextStyle inActive = const TextStyle(fontWeight: FontWeight.normal);
+  TextStyle active = const TextStyle(
+    fontWeight: FontWeight.bold,
+  );
+  TextStyle inActive = const TextStyle(fontSize: 14, fontWeight: FontWeight.normal);
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -118,7 +120,7 @@ class _DetailItemState extends State<DetailItem> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(widget.summaryBoxItem.title, style: bold ? active : inActive),
-            Text(widget.summaryBoxItem.value, style: bold ? active : inActive),
+            Text(widget.summaryBoxItem.value + " " + widget.summaryBoxItem.unit, style: bold ? active : inActive),
           ],
         ),
       ),
@@ -129,8 +131,6 @@ class _DetailItemState extends State<DetailItem> {
 class SummaryBoxItem {
   String title;
   String value;
-  SummaryBoxItem({
-    required this.title,
-    required this.value,
-  });
+  String unit;
+  SummaryBoxItem({required this.title, required this.value, required this.unit});
 }

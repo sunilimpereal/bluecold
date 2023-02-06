@@ -1,3 +1,4 @@
+import 'package:bluecold/home/calculator/cold%20room%20calculator/data/products.dart';
 import 'package:bluecold/home/calculator/widgets/form_section.dart';
 import 'package:bluecold/home/calculator/widgets/input_tile_number.dart';
 import 'package:bluecold/home/calculator/widgets/input_tile_option.dart';
@@ -12,6 +13,15 @@ class ProductDetail extends StatefulWidget {
 }
 
 class ProductDetailState extends State<ProductDetail> {
+  List<String> family = [];
+  List<String> productsInFamily = [];
+  @override
+  void initState() {
+    family = getProductFamily();
+    productsInFamily = getProductsInFamily(family[0]);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -22,38 +32,24 @@ class ProductDetailState extends State<ProductDetail> {
             formItems: [
               InputTileOption(
                 title: "Family",
-                options: const [
-                  "Beef",
-                  "Candy",
-                  "Diary Products",
-                  "Fish",
-                  "Fruits",
-                  "Juice and Beve",
-                  "Lamb",
-                  "Miscellaneous",
-                  "Nuts,Shelled",
-                  "Pork",
-                  "Poluty Products",
-                  "Sausage",
-                  "Vegetables",
-                ],
+                options: family,
                 onChanged: (value) {
+                  setState(() {
+                    productsInFamily = getProductsInFamily(value);
+                  });
                   sharedPrefColdRoom.setProductFamily(value);
                 },
               ),
               InputTileOption(
                 title: "Product",
-                options: const [
-                  "Vegetables-Mean",
-                  "",
-                ],
+                options: productsInFamily,
                 onChanged: (value) {
                   sharedPrefColdRoom.setProductProduct(value);
                 },
               ),
               InputTileNumber(
                 title: "Storage Density",
-                initialValue: 275,
+                initialValue: sharedPrefColdRoom.storageDensity,
                 maxValue: 1000,
                 minValue: 1,
                 gapValue: 5,
@@ -64,7 +60,7 @@ class ProductDetailState extends State<ProductDetail> {
               ),
               InputTileNumber(
                 title: "Quantity",
-                initialValue: 0,
+                initialValue: sharedPrefColdRoom.quantity,
                 maxValue: 100000,
                 minValue: 1,
                 gapValue: 5,
@@ -75,7 +71,7 @@ class ProductDetailState extends State<ProductDetail> {
               ),
               InputTileNumber(
                 title: "Daily Loading Percentage",
-                initialValue: 5,
+                initialValue: sharedPrefColdRoom.dailyLoadPerc,
                 maxValue: 100,
                 minValue: 1,
                 gapValue: 5,
@@ -86,7 +82,7 @@ class ProductDetailState extends State<ProductDetail> {
               ),
               InputTileNumber(
                 title: "Product Incoming Temp",
-                initialValue: 30,
+                initialValue: sharedPrefColdRoom.productIncTemp,
                 maxValue: 100,
                 minValue: 1,
                 gapValue: 5,
@@ -97,7 +93,7 @@ class ProductDetailState extends State<ProductDetail> {
               ),
               InputTileNumber(
                 title: "Product Final Temp",
-                initialValue: 4,
+                initialValue: sharedPrefColdRoom.productFinalTemp,
                 maxValue: 30,
                 minValue: 1,
                 gapValue: 5,
@@ -108,7 +104,7 @@ class ProductDetailState extends State<ProductDetail> {
               ),
               InputTileNumber(
                 title: "Cooling time",
-                initialValue: 24,
+                initialValue: sharedPrefColdRoom.coolingTime,
                 maxValue: 300,
                 minValue: 1,
                 gapValue: 5,

@@ -1,6 +1,10 @@
+import 'dart:developer';
+
 import 'package:bluecold/home/calculator/cold%20room%20calculator/ambient_room_detail.dart';
+import 'package:bluecold/home/calculator/cold%20room%20calculator/calculator.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/other_detail.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/product_detail.dart';
+import 'package:bluecold/home/calculator/cold%20room%20calculator/data/products.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/result_screen.dart';
 import 'package:bluecold/home/calculator/widgets/tab_bar.dart';
 import 'package:bluecold/home/calculator/widgets/tab_bar_view.dart';
@@ -26,6 +30,7 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
   late PageController pageController;
   @override
   void initState() {
+    ColdRoomCalculator().setDefaultValues();
     pageController = PageController(initialPage: currentIndex);
     super.initState();
   }
@@ -78,6 +83,8 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
         floatingActionButton: ElevatedButton(
           style: ElevatedButton.styleFrom(elevation: 8),
           onPressed: () {
+            Map e = ColdRoomCalculator().calculate();
+            log(e.toString());
             Navigator.of(context).push(
               CupertinoPageRoute(
                 builder: (context) => const ResultScreen(),

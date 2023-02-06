@@ -1,6 +1,7 @@
 import 'package:bluecold/home/calculator/widgets/form_section.dart';
 import 'package:bluecold/home/calculator/widgets/input_tile_number.dart';
 import 'package:bluecold/home/calculator/widgets/input_tile_option.dart';
+import 'package:bluecold/main.dart';
 import 'package:flutter/material.dart';
 
 class OtherDetail extends StatefulWidget {
@@ -15,7 +16,7 @@ class _OtherDetailState extends State<OtherDetail> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Column(
-        children: const [
+        children: [
           FormSection(
             title: "Produt Detail",
             formItems: [
@@ -24,70 +25,97 @@ class _OtherDetailState extends State<OtherDetail> {
                 options: [
                   "Normal",
                 ],
+                onChanged: (value) {
+                  sharedPrefColdRoom.setDoorOpenFreq(value);
+                },
               ),
               InputTileNumber(
                 title: "No. of persons in room",
-                initialValue: 2,
+                initialValue: sharedPrefColdRoom.noPersons,
                 maxValue: 20,
                 minValue: 1,
                 gapValue: 5,
                 unit: "",
+                onChanged: (value) {
+                  sharedPrefColdRoom.setNoPersons(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Working hours",
-                initialValue: 5,
+                initialValue: sharedPrefColdRoom.workingHrs,
                 maxValue: 24,
                 minValue: 1,
                 gapValue: 5,
                 unit: "hrs",
+                onChanged: (value) {
+                  sharedPrefColdRoom.setWorkingHrs(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Total rated power of all mototrs",
-                initialValue: 1500,
+                initialValue: sharedPrefColdRoom.totRatPow,
                 maxValue: 5000,
                 minValue: 1,
                 gapValue: 5,
                 unit: "W",
+                onChanged: (value) {
+                  sharedPrefColdRoom.setTotRatPow(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Motor Running hours",
-                initialValue: 20,
+                initialValue: sharedPrefColdRoom.motRunHrs,
                 maxValue: 100,
                 minValue: 1,
                 gapValue: 5,
                 unit: "hrs",
+                onChanged: (value) {
+                  sharedPrefColdRoom.setMotRunHrs(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Lighting",
-                initialValue: 10,
+                initialValue: sharedPrefColdRoom.lighting,
                 maxValue: 50,
                 minValue: 1,
                 gapValue: 5,
                 unit: "W/m2",
+                onChanged: (value) {
+                  sharedPrefColdRoom.setLighting(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Operating hours",
-                initialValue: 6,
+                initialValue: sharedPrefColdRoom.operatingHrs,
                 maxValue: 60,
                 minValue: 1,
                 gapValue: 5,
                 unit: "hrs",
+                onChanged: (value) {
+                  sharedPrefColdRoom.setOperatingHrs(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Compresseor Operating hours",
-                initialValue: 20,
+                initialValue: sharedPrefColdRoom.compOperatingHrs,
                 maxValue: 60,
                 minValue: 1,
                 gapValue: 5,
                 unit: "hrs",
+                onChanged: (value) {
+                  sharedPrefColdRoom.setCompOperatingHrs(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Safety Factor",
-                initialValue: 6,
+                initialValue: sharedPrefColdRoom.safetyFactor,
                 maxValue: 60,
                 minValue: 1,
                 gapValue: 5,
                 unit: "%",
+                onChanged: (value) {
+                  sharedPrefColdRoom.setSafetyFactor(double.parse(value));
+                },
               ),
             ],
           )

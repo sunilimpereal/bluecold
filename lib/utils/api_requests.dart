@@ -29,6 +29,7 @@ class ApiRequest<ReqModel, ResModel> {
       ResModel responseModel = reponseFromJson(response.body);
       return responseModel;
     }
+    return null;
     // } catch (e) {
     //   return null;
     // }

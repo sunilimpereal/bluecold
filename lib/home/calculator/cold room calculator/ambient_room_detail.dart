@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bluecold/home/calculator/widgets/form_section.dart';
 import 'package:bluecold/home/calculator/widgets/input_tile_number.dart';
 import 'package:bluecold/home/calculator/widgets/input_tile_option.dart';
@@ -19,7 +17,7 @@ class _AmbientRoomFormState extends State<AmbientRoomForm> {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          FocusScope.of(context).requestFocus(new FocusNode());
+          FocusScope.of(context).requestFocus(FocusNode());
         },
         child: SingleChildScrollView(
           child: Column(
@@ -29,7 +27,7 @@ class _AmbientRoomFormState extends State<AmbientRoomForm> {
                 formItems: [
                   InputTileNumber(
                     title: "External Length",
-                    initialValue: 5,
+                    initialValue: sharedPrefColdRoom.externalLength,
                     maxValue: 10,
                     minValue: 0,
                     gapValue: 1,
@@ -40,7 +38,7 @@ class _AmbientRoomFormState extends State<AmbientRoomForm> {
                   ),
                   InputTileNumber(
                     title: "External Width",
-                    initialValue: 5,
+                    initialValue: sharedPrefColdRoom.externalWidth,
                     maxValue: 10,
                     minValue: 0,
                     gapValue: 1,
@@ -51,7 +49,7 @@ class _AmbientRoomFormState extends State<AmbientRoomForm> {
                   ),
                   InputTileNumber(
                     title: "External Height",
-                    initialValue: 5,
+                    initialValue: sharedPrefColdRoom.externalHeight,
                     maxValue: 10,
                     minValue: 0,
                     gapValue: 1,
@@ -72,7 +70,7 @@ class _AmbientRoomFormState extends State<AmbientRoomForm> {
                   ),
                   InputTileNumber(
                     title: "Room Temperature",
-                    initialValue: 2,
+                    initialValue: sharedPrefColdRoom.roomTemperature,
                     maxValue: 100,
                     minValue: 0,
                     gapValue: 1,
@@ -83,7 +81,7 @@ class _AmbientRoomFormState extends State<AmbientRoomForm> {
                   ),
                   InputTileNumber(
                     title: "Room RH",
-                    initialValue: 75,
+                    initialValue: double.parse(sharedPrefColdRoom.roomRH),
                     maxValue: 100,
                     minValue: 0,
                     gapValue: 1,
@@ -108,9 +106,9 @@ class _AmbientRoomFormState extends State<AmbientRoomForm> {
                   InputTileOption(
                     title: "Insulation",
                     options: const [
-                      "PUF 40kg/m3",
-                      "PS 56kg/m3",
-                      "PS 56kg/m3",
+                      "PUF 40kg/m\u2103",
+                      "PS 56kg/m\u2103",
+                      "PS 56kg/m\u2103",
                     ],
                     onChanged: (value) {
                       sharedPrefColdRoom.setInsulation(value);
@@ -123,11 +121,11 @@ class _AmbientRoomFormState extends State<AmbientRoomForm> {
                 formItems: [
                   InputTileNumber(
                     title: "Ambient Temperature",
-                    initialValue: 5,
+                    initialValue: sharedPrefColdRoom.ambTemp,
                     maxValue: 10,
                     minValue: 0,
                     gapValue: 1,
-                    unit: "m",
+                    unit: "°C",
                     onChanged: (value) {
                       sharedPrefColdRoom.setAmbTemp(double.parse(value));
                     },

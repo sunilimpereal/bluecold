@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 class ApiUrls {
   static const String baseUrl = 'http://bluecoldapp.com:8080/newcold/';
   static const String login = 'user/add'; // login with number to get otp
@@ -15,6 +17,5 @@ class ApiUrls {
   static const String updateUserActiveStatus = "user/isActive";
   static const String updateUserUpdatePDf = "updatePdfInfo";
   static const String aboutUsurl = "http://www.bluecoldref.com/About-Us.aspx";
-  static const String contactUsUrl =
-      "http://www.bluecoldref.com/Contact-Us.aspx";
+  static const String contactUsUrl = "http://www.bluecoldref.com/Contact-Us.aspx";
 }
