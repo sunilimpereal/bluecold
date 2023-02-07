@@ -5,16 +5,17 @@ import 'package:bluecold/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'data/sharedpref_coldroom.dart';
+import 'data/sharedpref_bastroom.dart';
 
-class AmbientRoomForm extends StatefulWidget {
-  const AmbientRoomForm({super.key});
+class BlastAmbientRoomForm extends StatefulWidget {
+  const BlastAmbientRoomForm({super.key});
 
   @override
-  State<AmbientRoomForm> createState() => _AmbientRoomFormState();
+  State<BlastAmbientRoomForm> createState() => _BlastAmbientRoomFormState();
 }
 
-class _AmbientRoomFormState extends State<AmbientRoomForm> {
+class _BlastAmbientRoomFormState extends State<BlastAmbientRoomForm> {
+  SharedPrefBlastRoom blastRoom = sharedPrefsBlastRoom;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -29,35 +30,35 @@ class _AmbientRoomFormState extends State<AmbientRoomForm> {
                 formItems: [
                   InputTileNumber(
                     title: "External Length",
-                    initialValue: sharedPrefColdRoom.externalLength,
+                    initialValue: blastRoom.externalLength,
                     maxValue: 10,
                     minValue: 0,
                     gapValue: 1,
                     unit: "m",
                     onChanged: (value) {
-                      sharedPrefColdRoom.setExternalLength(double.parse(value));
+                      sharedPrefsBlastRoom.setExternalLength(double.parse(value));
                     },
                   ),
                   InputTileNumber(
                     title: "External Width",
-                    initialValue: sharedPrefColdRoom.externalWidth,
+                    initialValue: sharedPrefsBlastRoom.externalWidth,
                     maxValue: 10,
                     minValue: 0,
                     gapValue: 1,
                     unit: "m",
                     onChanged: (value) {
-                      sharedPrefColdRoom.setExternalWidth(double.parse(value));
+                      sharedPrefsBlastRoom.setExternalWidth(double.parse(value));
                     },
                   ),
                   InputTileNumber(
                     title: "External Height",
-                    initialValue: sharedPrefColdRoom.externalHeight,
+                    initialValue: sharedPrefsBlastRoom.externalHeight,
                     maxValue: 10,
                     minValue: 0,
                     gapValue: 1,
                     unit: "m",
                     onChanged: (value) {
-                      sharedPrefColdRoom.setExternalHeight(double.parse(value));
+                      sharedPrefsBlastRoom.setExternalHeight(double.parse(value));
                     },
                   ),
                   InputTileOption(
@@ -66,31 +67,31 @@ class _AmbientRoomFormState extends State<AmbientRoomForm> {
                       "Outside",
                       "Inside",
                     ],
-                    inititalValue: sharedPrefsColdRoom.roomLocation,
+                    inititalValue: sharedPrefsBlastRoom.roomLocation,
                     onChanged: (value) {
-                      sharedPrefColdRoom.setRoomLocation(value);
+                      sharedPrefsBlastRoom.setRoomLocation(value);
                     },
                   ),
                   InputTileNumber(
                     title: "Room Temperature",
-                    initialValue: sharedPrefColdRoom.roomTemperature,
+                    initialValue: sharedPrefsBlastRoom.roomTemperature,
                     maxValue: 100,
                     minValue: 0,
                     gapValue: 1,
                     unit: "°C",
                     onChanged: (value) {
-                      sharedPrefColdRoom.setRoomTemperature(double.parse(value));
+                      sharedPrefsBlastRoom.setRoomTemperature(double.parse(value));
                     },
                   ),
                   InputTileNumber(
                     title: "Room RH",
-                    initialValue: double.parse(sharedPrefColdRoom.roomRH),
+                    initialValue: double.parse(sharedPrefsBlastRoom.roomRH),
                     maxValue: 100,
                     minValue: 0,
                     gapValue: 1,
                     unit: "%",
                     onChanged: (value) {
-                      sharedPrefColdRoom.setRoomRH(value);
+                      sharedPrefsBlastRoom.setRoomRH(value);
                     },
                   ),
                   InputTileOption(
@@ -102,10 +103,9 @@ class _AmbientRoomFormState extends State<AmbientRoomForm> {
                       "120 mm",
                       "150 mm",
                     ],
-                    inititalValue: "${sharedPrefsColdRoom.insulationThickness.toInt()} mm",
+                    inititalValue: "${sharedPrefsBlastRoom.insulationThickness.toInt()} mm",
                     onChanged: (value) {
-                      setState(() {});
-                      sharedPrefColdRoom.setInsulationThickness(double.parse(value.replaceAll(" mm", "")));
+                      sharedPrefsBlastRoom.setInsulationThickness(double.parse(value.replaceAll(" mm", "")));
                     },
                   ),
                   InputTileOption(
@@ -115,9 +115,9 @@ class _AmbientRoomFormState extends State<AmbientRoomForm> {
                       "PS 56kg/m\u00B3",
                       "PS 56kg/m\u00B3",
                     ],
-                    inititalValue: sharedPrefsColdRoom.insulation,
+                    inititalValue: sharedPrefBlastRoom.insulation,
                     onChanged: (value) {
-                      sharedPrefColdRoom.setInsulation(value);
+                      sharedPrefsBlastRoom.setInsulation(value);
                     },
                   ),
                 ],
@@ -127,13 +127,13 @@ class _AmbientRoomFormState extends State<AmbientRoomForm> {
                 formItems: [
                   InputTileNumber(
                     title: "Ambient Temperature",
-                    initialValue: sharedPrefColdRoom.ambTemp,
+                    initialValue: sharedPrefsBlastRoom.ambTemp,
                     maxValue: 10,
                     minValue: 0,
                     gapValue: 1,
                     unit: "°C",
                     onChanged: (value) {
-                      sharedPrefColdRoom.setAmbTemp(double.parse(value));
+                      sharedPrefsBlastRoom.setAmbTemp(double.parse(value));
                     },
                   ),
                   InputTileOption(
@@ -142,16 +142,15 @@ class _AmbientRoomFormState extends State<AmbientRoomForm> {
                       "60 %",
                       "50 %",
                     ],
-                    inititalValue: "${sharedPrefsColdRoom.ambRH} %",
+                    inititalValue: "${sharedPrefsBlastRoom.ambRH} %",
                     onChanged: (value) {
-                      setState(() {});
-                      sharedPrefColdRoom.setAmbRH(value.replaceAll(" %", ""));
+                      sharedPrefsBlastRoom.setAmbRH(value.replaceAll(" %", ""));
                     },
                   ),
                 ],
               ),
               const SizedBox(
-                height: 100,
+                height: 50,
               )
             ],
           ),

@@ -1,9 +1,12 @@
 import 'package:bluecold/home/calculator/blast%20room%20calculator/blast_room_calculator.dart';
+import 'package:bluecold/home/calculator/cold%20room%20calculator/calculator.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/cold_room_calculator_screen.dart';
 import 'package:bluecold/home/screen/notification_screen.dart';
 import 'package:bluecold/home/screen/widgets/calculator_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../calculator/blast room calculator/calculator.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -68,6 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.blue.shade800,
             image: "cold-storage.png",
             onTap: () {
+              ColdRoomCalculator().setDefaultValues();
               Navigator.of(context).push(CupertinoPageRoute(builder: (context) => const ColdRoomCalculatorScreen()));
             },
           ),
@@ -76,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
             color: Colors.teal.shade800,
             image: "blast-room.png",
             onTap: () {
+              BlastRoomCalculator().setDefaultValues();
               Navigator.of(context).push(CupertinoPageRoute(builder: (context) => const BlastRoomCalculatorScreen()));
             },
           ),

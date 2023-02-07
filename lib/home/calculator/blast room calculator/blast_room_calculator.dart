@@ -1,5 +1,11 @@
+import 'dart:developer';
+
+import 'package:bluecold/home/calculator/blast%20room%20calculator/blast_ambient_room.dart';
+import 'package:bluecold/home/calculator/blast%20room%20calculator/calculator.dart';
+import 'package:bluecold/home/calculator/blast%20room%20calculator/data/sharedpref_bastroom.dart';
 import 'package:bluecold/home/calculator/blast%20room%20calculator/other_detail.dart';
 import 'package:bluecold/home/calculator/blast%20room%20calculator/product_detail.dart';
+import 'package:bluecold/home/calculator/blast%20room%20calculator/result_screen_blast.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -27,6 +33,7 @@ class _BlastRoomCalculatorScreenState extends State<BlastRoomCalculatorScreen> {
   @override
   void initState() {
     pageController = PageController(initialPage: currentIndex);
+
     super.initState();
   }
 
@@ -60,6 +67,20 @@ class _BlastRoomCalculatorScreenState extends State<BlastRoomCalculatorScreen> {
             ],
           ),
         ),
+        floatingActionButton: ElevatedButton(
+          style: ElevatedButton.styleFrom(elevation: 8),
+          onPressed: () {
+            BlastRoomCalculator().calculate();
+
+            Navigator.of(context).push(
+              CupertinoPageRoute(
+                builder: (context) => const BlastRoomResultScreen(),
+              ),
+            );
+          },
+          child: const Text("Summary"),
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.miniStartFloat,
       ),
     );
   }
@@ -90,8 +111,8 @@ class _BlastRoomCalculatorScreenState extends State<BlastRoomCalculatorScreen> {
                 });
               },
               pageController: pageController,
-              views: const [
-                AmbientRoomForm(),
+              views: [
+                BlastAmbientRoomForm(),
                 BlastRoomProductDetail(),
                 BlastRoomOtherDetail(),
               ])

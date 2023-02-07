@@ -23,8 +23,11 @@ class _OtherDetailState extends State<OtherDetail> {
               InputTileOption(
                 title: "Door Opening Frequency",
                 options: [
+                  "Light",
                   "Normal",
+                  "Heavy",
                 ],
+                inititalValue: sharedPrefColdRoom.doorOpenFreq,
                 onChanged: (value) {
                   sharedPrefColdRoom.setDoorOpenFreq(value);
                 },

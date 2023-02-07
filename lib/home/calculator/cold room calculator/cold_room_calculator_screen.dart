@@ -2,12 +2,14 @@ import 'dart:developer';
 
 import 'package:bluecold/home/calculator/cold%20room%20calculator/ambient_room_detail.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/calculator.dart';
+import 'package:bluecold/home/calculator/cold%20room%20calculator/data/sharedpref_coldroom.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/other_detail.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/product_detail.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/data/products.dart';
-import 'package:bluecold/home/calculator/cold%20room%20calculator/result_screen.dart';
+import 'package:bluecold/home/calculator/cold%20room%20calculator/result_screen_coldroom.dart';
 import 'package:bluecold/home/calculator/widgets/tab_bar.dart';
 import 'package:bluecold/home/calculator/widgets/tab_bar_view.dart';
+import 'package:bluecold/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -87,7 +89,7 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
             log(e.toString());
             Navigator.of(context).push(
               CupertinoPageRoute(
-                builder: (context) => const ResultScreen(),
+                builder: (context) => const ColdRoomResultScreen(),
               ),
             );
           },
@@ -124,10 +126,10 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
                 });
               },
               pageController: pageController,
-              views: const [
+              views: [
                 AmbientRoomForm(),
-                ProductDetail(),
-                OtherDetail(),
+                const ProductDetail(),
+                const OtherDetail(),
               ])
         ]),
       ),

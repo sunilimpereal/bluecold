@@ -33,6 +33,7 @@ class ProductDetailState extends State<ProductDetail> {
               InputTileOption(
                 title: "Family",
                 options: family,
+                inititalValue: sharedPrefColdRoom.productFamily,
                 onChanged: (value) {
                   setState(() {
                     productsInFamily = getProductsInFamily(value);
@@ -43,6 +44,7 @@ class ProductDetailState extends State<ProductDetail> {
               InputTileOption(
                 title: "Product",
                 options: productsInFamily,
+                inititalValue: sharedPrefColdRoom.productProduct,
                 onChanged: (value) {
                   sharedPrefColdRoom.setProductProduct(value);
                 },

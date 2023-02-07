@@ -3,17 +3,17 @@ import 'dart:developer';
 import 'package:bluecold/home/calculator/widgets/summary_box.dart';
 import 'package:bluecold/home/profile/widgets/app_bar.dart';
 import 'package:bluecold/utils/screen.dart';
-import 'package:bluecold/home/calculator/cold%20room%20calculator/sharedpref_coldroom.dart';
+import 'package:bluecold/home/calculator/cold%20room%20calculator/data/sharedpref_coldroom.dart';
 import 'package:flutter/material.dart';
 
-class ResultScreen extends StatefulWidget {
-  const ResultScreen({super.key});
+class ColdRoomResultScreen extends StatefulWidget {
+  const ColdRoomResultScreen({super.key});
 
   @override
-  State<ResultScreen> createState() => _ResultScreenState();
+  State<ColdRoomResultScreen> createState() => _ColdRoomResultScreenState();
 }
 
-class _ResultScreenState extends State<ResultScreen> {
+class _ColdRoomResultScreenState extends State<ColdRoomResultScreen> {
   SharedPrefColdRoom coldRoom = sharedPrefsColdRoom;
   @override
   Widget build(BuildContext context) {

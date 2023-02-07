@@ -5,7 +5,7 @@ import "dart:math" as Math;
 
 import 'package:bluecold/home/calculator/cold%20room%20calculator/data/air_changes.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/data/products.dart';
-import 'package:bluecold/home/calculator/cold%20room%20calculator/sharedpref_coldroom.dart';
+import 'package:bluecold/home/calculator/cold%20room%20calculator/data/sharedpref_coldroom.dart';
 import 'package:bluecold/main.dart';
 
 import 'data/bt_upper_cube_feet.dart';
@@ -22,7 +22,7 @@ class ColdRoomCalculator {
     coldRoom.setRoomTemperature(2);
     coldRoom.setRoomRH("75");
     coldRoom.setInsulationThickness(80);
-    coldRoom.setInsulation("PUF 40kg/m\u2103");
+    coldRoom.setInsulation("PUF 40kg/m\u00B3");
 
     //ambient details
     coldRoom.setAmbTemp(40);

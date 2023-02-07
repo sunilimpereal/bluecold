@@ -1,8 +1,12 @@
+import 'package:bluecold/home/calculator/blast%20room%20calculator/data/sharedpref_bastroom.dart';
 import 'package:bluecold/home/calculator/widgets/input_tile_option.dart';
+import 'package:bluecold/main.dart';
 import 'package:flutter/material.dart';
 
+import '../cold room calculator/data/products.dart';
 import '../widgets/form_section.dart';
 import '../widgets/input_tile_number.dart';
+import 'data/blast_products.dart';
 
 class BlastRoomProductDetail extends StatefulWidget {
   const BlastRoomProductDetail({super.key});
@@ -12,38 +16,39 @@ class BlastRoomProductDetail extends StatefulWidget {
 }
 
 class _BlastRoomProductDetailState extends State<BlastRoomProductDetail> {
+  List<String> family = [];
+  List<String> productsInFamily = [];
+
+  @override
+  void initState() {
+    family = getBlastProductFamily();
+    productsInFamily = getBlastProductsInFamily(family[0]);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Column(
-        children: const [
+        children: [
           FormSection(
             title: "Produt Detail",
             formItems: [
               InputTileOption(
                 title: "Family",
-                options: [
-                  "Beef",
-                  "Candy",
-                  "Diary Products",
-                  "Fish",
-                  "Fruits",
-                  "Juice and Beve",
-                  "Lamb",
-                  "Miscellaneous",
-                  "Nuts,Shelled",
-                  "Pork",
-                  "Poluty Products",
-                  "Sausage",
-                  "Vegetables",
-                ],
+                options: family,
+                inititalValue: sharedPrefBlastRoom.productFamily,
+                onChanged: (value) {
+                  sharedPrefBlastRoom.setProductFamily(value);
+                },
               ),
               InputTileOption(
                 title: "Product",
-                options: [
-                  "Vegetables-Mean",
-                  "",
-                ],
+                options: productsInFamily,
+                inititalValue: sharedPrefsBlastRoom.productProduct,
+                onChanged: (value) {
+                  sharedPrefBlastRoom.setProductFamily(value);
+                },
               ),
               InputTileNumber(
                 title: "Quantity per batch",
@@ -52,6 +57,9 @@ class _BlastRoomProductDetailState extends State<BlastRoomProductDetail> {
                 minValue: 1,
                 gapValue: 5,
                 unit: "kg",
+                onChanged: (value) {
+                  sharedPrefBlastRoom.setQuantityPerBatch(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Product incoming temp",
@@ -60,6 +68,9 @@ class _BlastRoomProductDetailState extends State<BlastRoomProductDetail> {
                 minValue: 1,
                 gapValue: 5,
                 unit: "°C",
+                onChanged: (value) {
+                  sharedPrefBlastRoom.setProductIncTemp(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Product final",
@@ -68,6 +79,9 @@ class _BlastRoomProductDetailState extends State<BlastRoomProductDetail> {
                 minValue: 1,
                 gapValue: 5,
                 unit: "°C",
+                onChanged: (value) {
+                  sharedPrefBlastRoom.setProductFinalTemp(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Pull down time",
@@ -76,6 +90,9 @@ class _BlastRoomProductDetailState extends State<BlastRoomProductDetail> {
                 minValue: 1,
                 gapValue: 5,
                 unit: "hrs",
+                onChanged: (value) {
+                  sharedPrefBlastRoom.setPullDownTime(double.parse(value));
+                },
               ),
             ],
           )

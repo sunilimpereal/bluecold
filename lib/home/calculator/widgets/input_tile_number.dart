@@ -41,7 +41,7 @@ class _InputTileNumberState extends State<InputTileNumber> {
     focusNode.addListener(() {
       setState(() {});
     });
-    _controller.text = widget.initialValue.ceil().toString();
+    _controller.text = widget.initialValue.toString();
 
     _controller.addListener(() {
       widget.onChanged!(_controller.text);

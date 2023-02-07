@@ -1,3 +1,5 @@
+import 'package:bluecold/home/calculator/blast%20room%20calculator/data/sharedpref_bastroom.dart';
+import 'package:bluecold/main.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/form_section.dart';
@@ -16,15 +18,21 @@ class _BlastRoomOtherDetailState extends State<BlastRoomOtherDetail> {
   Widget build(BuildContext context) {
     return GestureDetector(
       child: Column(
-        children: const [
+        children: [
           FormSection(
             title: "Produt Detail",
             formItems: [
               InputTileOption(
                 title: "Door Opening Frequency",
                 options: [
+                  "Light",
                   "Normal",
+                  "Heavy",
                 ],
+                inititalValue: sharedPrefsBlastRoom.doorOpenFreq,
+                onChanged: (value) {
+                  sharedPrefBlastRoom.setDoorOpenFreq(value);
+                },
               ),
               InputTileNumber(
                 title: "Total rated power of all mototrs",
@@ -33,6 +41,9 @@ class _BlastRoomOtherDetailState extends State<BlastRoomOtherDetail> {
                 minValue: 1,
                 gapValue: 5,
                 unit: "W",
+                onChanged: (value) {
+                  sharedPrefBlastRoom.setTotRatPow(double.parse(value));
+                },
               ),
               InputTileNumber(
                 title: "Safety Factor",
@@ -41,6 +52,9 @@ class _BlastRoomOtherDetailState extends State<BlastRoomOtherDetail> {
                 minValue: 1,
                 gapValue: 5,
                 unit: "%",
+                onChanged: (value) {
+                  sharedPrefBlastRoom.setSafetyFactor(double.parse(value));
+                },
               ),
             ],
           )
