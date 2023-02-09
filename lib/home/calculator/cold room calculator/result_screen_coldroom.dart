@@ -1,10 +1,12 @@
 import 'dart:developer';
 
-import 'package:bluecold/home/calculator/cold%20room%20calculator/cold_room_pdf.dart';
+import 'package:bluecold/home/calculator/cold%20room%20calculator/pdf/cold_room_pdf.dart';
+import 'package:bluecold/home/calculator/cold%20room%20calculator/pdf/pdf_input_screen.dart';
 import 'package:bluecold/home/calculator/widgets/summary_box.dart';
 import 'package:bluecold/home/profile/widgets/app_bar.dart';
 import 'package:bluecold/utils/screen.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/data/sharedpref_coldroom.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ColdRoomResultScreen extends StatefulWidget {
@@ -106,7 +108,12 @@ class _ColdRoomResultScreenState extends State<ColdRoomResultScreen> {
         ),
         floatingActionButton: ElevatedButton(
             onPressed: () {
-              ColdRoomPdf().generatePdf();
+              Navigator.of(context).push(CupertinoPageRoute(
+                  builder: (context) => PdfInputScreen(
+                        onSubmitted: () {
+                          ColdRoomPdf().generatePdf();
+                        },
+                      )));
             },
             child: const Text("pdf")),
       ),

@@ -1,11 +1,14 @@
 import 'dart:developer';
 
+import 'package:bluecold/home/calculator/blast%20room%20calculator/blast_rrom_pdf.dart';
 import 'package:bluecold/home/calculator/blast%20room%20calculator/data/calculator.dart';
 import 'package:bluecold/home/calculator/blast%20room%20calculator/data/sharedpref_bastroom.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../utils/screen.dart';
 import '../../profile/widgets/app_bar.dart';
+import '../cold room calculator/pdf/pdf_input_screen.dart';
 import '../widgets/summary_box.dart';
 
 class BlastRoomResultScreen extends StatefulWidget {
@@ -99,6 +102,16 @@ class _BlastRoomResultScreenState extends State<BlastRoomResultScreen> {
             ],
           ),
         ),
+        floatingActionButton: ElevatedButton(
+            onPressed: () {
+              Navigator.of(context).push(CupertinoPageRoute(
+                  builder: (context) => PdfInputScreen(
+                        onSubmitted: () {
+                          BlastRoomPdf().generatePdf();
+                        },
+                      )));
+            },
+            child: const Text("pdf")),
       ),
     );
   }

@@ -17,6 +17,26 @@ class SharedPref {
   String get photoUrl => _sharedPref!.getString('photoUrl') ?? "";
   String? get token => _sharedPref!.getString('authToken');
 
+  //pdf inputs
+  String? get customer => _sharedPref!.getString('customer');
+  String? get jobReferance => _sharedPref!.getString('jobReferance');
+  String? get roomName => _sharedPref!.getString('roomName');
+  String? get emailId => _sharedPref!.getString('emailId');
+
+  /// set pdf inputs
+
+  setPdfInputs({
+    required String customer,
+    required String jobReference,
+    required String roomName,
+    required String emailId,
+  }) {
+    _sharedPref!.setString('customer', customer);
+    _sharedPref!.setString('jobReference', jobReference);
+    _sharedPref!.setString('roomName', roomName);
+    _sharedPref!.setString('emailId', emailId);
+  }
+
   ///Set as logged in
   setLoggedIn() {
     _sharedPref!.setBool('loggedIn', true);
