@@ -4,8 +4,8 @@ import 'dart:developer';
 import "dart:math" as Math;
 import 'package:bluecold/home/calculator/blast%20room%20calculator/data/blast_products.dart';
 import 'package:bluecold/home/calculator/blast%20room%20calculator/data/sharedpref_bastroom.dart';
-import '../cold room calculator/data/air_changes.dart';
-import '../cold room calculator/data/bt_upper_cube_feet.dart';
+import '../../cold room calculator/data/air_changes.dart';
+import '../../cold room calculator/data/bt_upper_cube_feet.dart';
 
 class BlastRoomCalculator {
   SharedPrefBlastRoom blastRoom = sharedPrefsBlastRoom;
@@ -235,6 +235,7 @@ class BlastRoomCalculator {
 
     double othe_total_heat_filteration =
         (btu_per_hr_going_inside_room / 12000) * 3.52 * other_door_oprating_time * other_no_doors * other_door_opr_freq_factor;
+
     ////    internal Load
 
     double fg_fTotalRatPower = blastRoom.totRatPow;

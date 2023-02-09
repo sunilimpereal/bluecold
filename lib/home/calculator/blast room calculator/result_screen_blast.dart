@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:bluecold/home/calculator/blast%20room%20calculator/calculator.dart';
+import 'package:bluecold/home/calculator/blast%20room%20calculator/data/calculator.dart';
 import 'package:bluecold/home/calculator/blast%20room%20calculator/data/sharedpref_bastroom.dart';
 import 'package:flutter/material.dart';
 

@@ -28,6 +28,7 @@ class SharedPrefColdRoom {
   String ProductIncTemp = "ProductIncTemp";
   String ProductFinalTemp = "ProductFinalTemp";
   String CoolingTime = "CoolingTime";
+
   //other details
   String DoorOpenFreq = "DoorOpenFreq";
   String NoPersons = "NoPersons";

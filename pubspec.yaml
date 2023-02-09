@@ -45,6 +45,8 @@ dependencies:
   flutter_facebook_auth: ^5.0.7
   http: ^0.13.5
   shared_preferences: ^2.0.17
+  pdf: ^3.9.0
+  open_file: ^3.2.1
 
 dev_dependencies:
   flutter_test:

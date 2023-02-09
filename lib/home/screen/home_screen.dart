@@ -1,12 +1,12 @@
 import 'package:bluecold/home/calculator/blast%20room%20calculator/blast_room_calculator.dart';
-import 'package:bluecold/home/calculator/cold%20room%20calculator/calculator.dart';
+import 'package:bluecold/home/calculator/cold%20room%20calculator/data/calculator.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/cold_room_calculator_screen.dart';
 import 'package:bluecold/home/screen/notification_screen.dart';
 import 'package:bluecold/home/screen/widgets/calculator_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../calculator/blast room calculator/calculator.dart';
+import '../calculator/blast room calculator/data/calculator.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

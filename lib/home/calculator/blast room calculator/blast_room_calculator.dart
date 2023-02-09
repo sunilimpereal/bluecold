@@ -1,7 +1,7 @@
 import 'dart:developer';
 
 import 'package:bluecold/home/calculator/blast%20room%20calculator/blast_ambient_room.dart';
-import 'package:bluecold/home/calculator/blast%20room%20calculator/calculator.dart';
+import 'package:bluecold/home/calculator/blast%20room%20calculator/data/calculator.dart';
 import 'package:bluecold/home/calculator/blast%20room%20calculator/data/sharedpref_bastroom.dart';
 import 'package:bluecold/home/calculator/blast%20room%20calculator/other_detail.dart';
 import 'package:bluecold/home/calculator/blast%20room%20calculator/product_detail.dart';

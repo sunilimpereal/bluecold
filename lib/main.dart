@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:bluecold/authentication/screens/login.dart';
 import 'package:bluecold/home/calculator/blast%20room%20calculator/data/sharedpref_bastroom.dart';
+import 'package:bluecold/home/screen/home_navigation.dart';
 import 'package:bluecold/theme/theme1.dart';
 import 'package:bluecold/utils/ApiUrls.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/data/sharedpref_coldroom.dart';
@@ -51,7 +52,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'BlueCold',
       theme: theme1,
-      home: const LoginScreen(),
+      home: FirebaseAuth.instance.currentUser == null ? const LoginScreen() : const HomeNavigation(),
     );
   }
 }

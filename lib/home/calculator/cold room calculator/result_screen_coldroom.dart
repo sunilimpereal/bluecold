@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:bluecold/home/calculator/cold%20room%20calculator/cold_room_pdf.dart';
 import 'package:bluecold/home/calculator/widgets/summary_box.dart';
 import 'package:bluecold/home/profile/widgets/app_bar.dart';
 import 'package:bluecold/utils/screen.dart';
@@ -103,6 +104,11 @@ class _ColdRoomResultScreenState extends State<ColdRoomResultScreen> {
             ],
           ),
         ),
+        floatingActionButton: ElevatedButton(
+            onPressed: () {
+              ColdRoomPdf().generatePdf();
+            },
+            child: const Text("pdf")),
       ),
     );
   }

@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:ui';
+
 import 'package:bluecold/home/profile/widgets/app_bar.dart';
 import 'package:bluecold/home/screen/home_navigation.dart';
 import 'package:bluecold/utils/screen.dart';
@@ -23,6 +26,57 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   TextEditingController otp4 = TextEditingController();
   TextEditingController otp5 = TextEditingController();
   TextEditingController otp6 = TextEditingController();
+
+  FocusNode focus1 = FocusNode();
+  FocusNode focus2 = FocusNode();
+  FocusNode focus3 = FocusNode();
+  FocusNode focus4 = FocusNode();
+  FocusNode focus5 = FocusNode();
+  FocusNode focus6 = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  int curIndex = 1;
+  onChanged(int index) {
+    setState(() {
+      curIndex = index;
+    });
+  }
+
+  delete() {
+    deletevalue(FocusNode node, TextEditingController controller) {
+      node.requestFocus();
+      controller.clear();
+      setState(() {
+        curIndex = curIndex - 1;
+      });
+    }
+
+    switch (curIndex - 1) {
+      case 1:
+        deletevalue(focus1, otp1);
+        break;
+      case 2:
+        deletevalue(focus2, otp2);
+        break;
+      case 3:
+        deletevalue(focus3, otp3);
+        break;
+      case 4:
+        deletevalue(focus4, otp4);
+        break;
+      case 5:
+        deletevalue(focus5, otp5);
+        break;
+      case 6:
+        deletevalue(focus6, otp6);
+        break;
+      default:
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,24 +107,56 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                 ],
               ),
             ),
-            Form(
-              child: Row(
-                children: [
-                  otpField(otpNumberController: otp1, isFirst: true),
-                  otpField(
-                    otpNumberController: otp2,
-                  ),
-                  otpField(
-                    otpNumberController: otp3,
-                  ),
-                  otpField(
-                    otpNumberController: otp4,
-                  ),
-                  otpField(
-                    otpNumberController: otp5,
-                  ),
-                  otpField(otpNumberController: otp6, isLast: true),
-                ],
+            RawKeyboardListener(
+              focusNode: FocusNode(),
+              onKey: (event) {
+                if (event.isKeyPressed(LogicalKeyboardKey.backspace)) {
+                  delete();
+                }
+              },
+              child: Form(
+                child: Row(
+                  children: [
+                    otpField(
+                      focus: focus1,
+                      i: 1,
+                      onChanged: onChanged,
+                      otpNumberController: otp1,
+                      isFirst: true,
+                    ),
+                    otpField(
+                      i: 2,
+                      focus: focus2,
+                      onChanged: onChanged,
+                      otpNumberController: otp2,
+                    ),
+                    otpField(
+                      i: 3,
+                      focus: focus3,
+                      onChanged: onChanged,
+                      otpNumberController: otp3,
+                    ),
+                    otpField(
+                      i: 4,
+                      focus: focus4,
+                      onChanged: onChanged,
+                      otpNumberController: otp4,
+                    ),
+                    otpField(
+                      i: 5,
+                      focus: focus5,
+                      onChanged: onChanged,
+                      otpNumberController: otp5,
+                    ),
+                    otpField(
+                      i: 6,
+                      focus: focus6,
+                      onChanged: onChanged,
+                      otpNumberController: otp6,
+                      isLast: true,
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -79,7 +165,13 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     );
   }
 
-  Widget otpField({required TextEditingController otpNumberController, bool isFirst = false, bool isLast = false}) {
+  Widget otpField(
+      {required TextEditingController otpNumberController,
+      bool isFirst = false,
+      bool isLast = false,
+      required int i,
+      required FocusNode focus,
+      required Function(int) onChanged}) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
@@ -98,10 +190,12 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
               autofocus: isFirst,
               keyboardType: TextInputType.number,
               showCursor: false,
+              focusNode: focus,
               textAlign: TextAlign.center,
               onChanged: (value) {
                 if (value.length == 1) {
                   FocusScope.of(context).nextFocus();
+                  onChanged(i + 1);
                   if (isLast) {
                     _validate();
                   }

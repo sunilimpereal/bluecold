@@ -8,7 +8,7 @@ import 'package:bluecold/home/calculator/cold%20room%20calculator/data/products.
 import 'package:bluecold/home/calculator/cold%20room%20calculator/data/sharedpref_coldroom.dart';
 import 'package:bluecold/main.dart';
 
-import 'data/bt_upper_cube_feet.dart';
+import 'bt_upper_cube_feet.dart';
 
 class ColdRoomCalculator {
   SharedPrefColdRoom coldRoom = sharedPrefsColdRoom;
