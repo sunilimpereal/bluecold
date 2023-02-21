@@ -76,12 +76,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
             width: size.width * 0.3,
             height: size.width * 0.3,
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: Colors.blue.shade50,
               borderRadius: BorderRadius.circular(100),
-              image: DecorationImage(
-                image: NetworkImage(sharedPrefs.photoUrl),
-                fit: BoxFit.cover,
-              ),
+              image: sharedPrefs.photoUrl != ""
+                  ? DecorationImage(
+                      image: NetworkImage(sharedPrefs.photoUrl),
+                      fit: BoxFit.cover,
+                    )
+                  : const DecorationImage(
+                      image: AssetImage('assets/images/usernotfound.png'),
+                      fit: BoxFit.cover,
+                    ),
             ),
           ),
           // name card

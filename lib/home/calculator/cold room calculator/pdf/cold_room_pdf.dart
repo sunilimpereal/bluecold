@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:ui';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/data/sharedpref_coldroom.dart';
 import 'package:bluecold/main.dart';
+import 'package:bluecold/utils/shared_preferences.dart';
 import 'package:open_file/open_file.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -41,7 +42,7 @@ class ColdRoomPdf {
     createPage();
     final directory = await getApplicationSupportDirectory();
     final path = directory.path;
-    final file = File("$path/example.pdf");
+    final file = File("$path/${sharedPrefs.customer}.pdf");
     File f = await file.writeAsBytes(await doc.save());
     OpenFile.open(f.path);
     log(f.path);

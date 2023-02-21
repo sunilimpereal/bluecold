@@ -4,8 +4,7 @@
 
 import 'dart:convert';
 
-LoginResponse loginResponseFromJson(String str) =>
-    LoginResponse.fromJson(json.decode(str));
+LoginResponse loginResponseFromJson(String str) => LoginResponse.fromJson(json.decode(str));
 
 String loginResponseToJson(LoginResponse data) => json.encode(data.toJson());
 
@@ -21,7 +20,7 @@ class LoginResponse {
   User user;
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) => LoginResponse(
-        otp: json["otp"],
+        otp: json["otp"] ?? 0,
         message: json["message"],
         user: User.fromJson(json["user"]),
       );

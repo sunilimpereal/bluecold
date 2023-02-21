@@ -20,17 +20,22 @@ class _LoginTopSectionState extends State<LoginTopSection> {
     return KeyboardVisibilityBuilder(
       builder: (p0, isKeyboardVisible) {
         height = isKeyboardVisible ? 0.3 : 0.5;
-        return ClipPath(
+        return ClipShadowPath(
           clipper: CustomClipperLogin(),
-          child: AnimatedContainer(
-            duration: const Duration(milliseconds: 500),
-            height: MediaQuery.of(context).size.height * height,
-            width: MediaQuery.of(context).size.width,
-            color: Colors.lightBlue.shade100,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Container(
-                decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/logo.png'))),
+          shadow: Shadow(blurRadius: 20, color: Colors.blue.shade100),
+          child: Material(
+            elevation: 20,
+            color: Colors.red,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 500),
+              height: MediaQuery.of(context).size.height * height,
+              width: MediaQuery.of(context).size.width,
+              color: Colors.lightBlueAccent.shade100,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/logo.png'))),
+                ),
               ),
             ),
           ),
@@ -52,6 +57,52 @@ class CustomClipperLogin extends CustomClipper<Path> {
 
   @override
   bool shouldReclip(CustomClipper oldClipper) {
+    return true;
+  }
+}
+
+@immutable
+class ClipShadowPath extends StatelessWidget {
+  final Shadow shadow;
+  final CustomClipper<Path> clipper;
+  final Widget child;
+
+  ClipShadowPath({
+    required this.shadow,
+    required this.clipper,
+    required this.child,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomPaint(
+      painter: _ClipShadowShadowPainter(
+        clipper: this.clipper,
+        shadow: this.shadow,
+      ),
+      child: ClipPath(child: child, clipper: this.clipper),
+    );
+  }
+}
+
+class _ClipShadowShadowPainter extends CustomPainter {
+  final Shadow shadow;
+  final CustomClipper<Path> clipper;
+
+  _ClipShadowShadowPainter({
+    required this.shadow,
+    required this.clipper,
+  });
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = shadow.toPaint();
+    var clipPath = clipper.getClip(size).shift(shadow.offset);
+    canvas.drawPath(clipPath, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
     return true;
   }
 }

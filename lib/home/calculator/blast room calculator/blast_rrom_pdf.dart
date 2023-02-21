@@ -39,7 +39,7 @@ class BlastRoomPdf {
     createPage();
     final directory = await getApplicationSupportDirectory();
     final path = directory.path;
-    final file = File("$path/example.pdf");
+    final file = File("$path/${sharedPref.company}.pdf");
     File f = await file.writeAsBytes(await doc.save());
     OpenFile.open(f.path);
     log(f.path);

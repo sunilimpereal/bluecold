@@ -5,6 +5,7 @@ class AppInputField extends StatefulWidget {
   final TextInputType textInputType;
   final TextEditingController textEditingController;
   final Function(String) onSubmitted;
+  final Function(String)? onChanged;
   final String? Function(String?)? validator;
   const AppInputField({
     super.key,
@@ -12,6 +13,7 @@ class AppInputField extends StatefulWidget {
     this.textInputType = TextInputType.text,
     required this.textEditingController,
     required this.onSubmitted,
+    this.onChanged,
     this.validator,
   });
 
@@ -32,6 +34,7 @@ class _AppInputFieldState extends State<AppInputField> {
           fontSize: 18,
         ),
         validator: widget.validator,
+        onChanged: widget.onChanged,
         decoration: InputDecoration(
           labelText: widget.label,
           labelStyle: const TextStyle(

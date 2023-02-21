@@ -21,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _numberController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool isVerfyNumber = false;
 
   @override
   void initState() {
@@ -66,6 +67,11 @@ class _LoginScreenState extends State<LoginScreen> {
               label: "Mobile",
               textEditingController: _numberController,
               onSubmitted: (value) {},
+              onChanged: (v) {
+                setState(() {
+                  isVerfyNumber = false;
+                });
+              },
               textInputType: TextInputType.number,
               validator: (value) {
                 if (value == null || value.isEmpty) {
@@ -125,18 +131,24 @@ class _LoginScreenState extends State<LoginScreen> {
                 .loginWithNumber(
                     LoginRequest(socialId: _numberController.text, contact: _numberController.text, name: _nameController.text, email: ""))
                 .then((value) {
+              if (value!.otp == 0) {
+                setState(() {
+                  isVerfyNumber = true;
+                });
+                return;
+              }
               sharedPrefs.setUserDetails(
-                id: value?.user.id.toString() ?? '',
-                email: value?.user.email ?? '',
-                name: value?.user.name ?? '',
-                number: value?.user.contact ?? '',
-                address: value?.user.address ?? '',
-                company: value?.user.companyName ?? '',
-                photoUrl: value?.user.imageUrl ?? '',
+                id: value.user.id.toString(),
+                email: value.user.email ?? '',
+                name: value.user.name,
+                number: value.user.contact,
+                address: value.user.address ?? '',
+                company: value.user.companyName ?? '',
+                photoUrl: value.user.imageUrl ?? '',
               );
               Navigator.of(context).push(CupertinoPageRoute(
                   builder: (context) => OtpVerificationScreen(
-                        otp: value!.otp.toString(),
+                        otp: value.otp.toString(),
                       )));
             });
           }
@@ -145,9 +157,9 @@ class _LoginScreenState extends State<LoginScreen> {
           width: MediaQuery.of(context).size.width * 0.4,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
-            children: const [
+            children: [
               Text(
-                "Login",
+                !isVerfyNumber ? "Login" : "Verify Number",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
