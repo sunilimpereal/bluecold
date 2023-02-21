@@ -32,7 +32,23 @@ class _BlastRoomResultScreenState extends State<BlastRoomResultScreen> {
         body: Center(
           child: Column(
             children: [
-              const CustomAppBar(title: "Heat Load Summary"),
+              CustomAppBar(
+                title: "Heat Load Summary",
+                options: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.of(context).push(CupertinoPageRoute(
+                            builder: (context) => PdfInputScreen(
+                                  onSubmitted: () {
+                                    BlastRoomPdf().generatePdf();
+                                  },
+                                )));
+                      },
+                      icon: const Icon(
+                        Icons.print,
+                      ))
+                ],
+              ),
               GestureDetector(
                 onLongPressMoveUpdate: (details) {
                   log("message`");
@@ -102,16 +118,7 @@ class _BlastRoomResultScreenState extends State<BlastRoomResultScreen> {
             ],
           ),
         ),
-        floatingActionButton: ElevatedButton(
-            onPressed: () {
-              Navigator.of(context).push(CupertinoPageRoute(
-                  builder: (context) => PdfInputScreen(
-                        onSubmitted: () {
-                          BlastRoomPdf().generatePdf();
-                        },
-                      )));
-            },
-            child: const Text("pdf")),
+        floatingActionButton: ElevatedButton(onPressed: () {}, child: const Text("pdf")),
       ),
     );
   }

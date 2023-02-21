@@ -1,4 +1,5 @@
 import 'package:bluecold/home/profile/widgets/app_bar.dart';
+import 'package:bluecold/main.dart';
 import 'package:bluecold/utils/screen.dart';
 import 'package:flutter/material.dart';
 
@@ -18,11 +19,11 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
 
   @override
   void initState() {
-    nameController.text = "Sunil";
-    companyController.text = "Blue Cold";
-    phoneController.text = "6363865667";
-    emailController.text = "sunil@gmail.com";
-    addressController.text = "Lorem Ipsum sit amet, consectetur elit, sed do incididunt ut";
+    nameController.text = sharedPref.name;
+    companyController.text = sharedPref.company;
+    phoneController.text = sharedPref.number;
+    emailController.text = sharedPref.email;
+    addressController.text = sharedPref.address;
     super.initState();
   }
 
@@ -72,7 +73,17 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ElevatedButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              sharedPref.setUserDetails(
+                                  id: sharedPref.id,
+                                  email: emailController.text,
+                                  name: nameController.text,
+                                  company: companyController.text,
+                                  number: phoneController.text,
+                                  address: addressController.text,
+                                  photoUrl: sharedPref.photoUrl);
+                              Navigator.pop(context);
+                            },
                             child: const Padding(
                               padding: EdgeInsets.all(16.0),
                               child: Text(

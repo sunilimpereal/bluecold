@@ -95,6 +95,9 @@ class _BlastRoomProductDetailState extends State<BlastRoomProductDetail> {
                 },
               ),
             ],
+          ),
+          const SizedBox(
+            height: 40,
           )
         ],
       ),

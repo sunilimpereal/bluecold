@@ -52,6 +52,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'BlueCold',
       theme: theme1,
+      debugShowCheckedModeBanner: false,
       home: FirebaseAuth.instance.currentUser == null ? const LoginScreen() : const HomeNavigation(),
     );
   }

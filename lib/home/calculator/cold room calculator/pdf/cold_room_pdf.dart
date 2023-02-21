@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+import 'dart:ui';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/data/sharedpref_coldroom.dart';
 import 'package:bluecold/main.dart';
 import 'package:open_file/open_file.dart';
@@ -20,6 +21,7 @@ class ColdRoomPdf {
           _contentHeader(context),
           projectDetail(context),
           ambinetDefinition(context),
+          roomDefinition(context),
           productDefinotion(context),
           internalFactors(context),
           heatLoadResults(context),
@@ -77,8 +79,8 @@ class ColdRoomPdf {
   }
 
   ambinetDefinition(pw.Context context) {
-    return tableBox(context: context, heading: "Ambinet Definition", tableElementsCol1: [
-      tableEelment(title: "Ambient Temperature", value: "${coldRoom.ambTemp} \u2103"),
+    return tableBox(context: context, heading: "Ambient Definition", tableElementsCol1: [
+      tableEelment(title: "Ambient Temperature", value: "${coldRoom.ambTemp} °C"),
     ], tableElementsCol2: [
       tableEelment(title: "Ambient RH", value: "${coldRoom.ambRH} %"),
     ]);
@@ -94,25 +96,25 @@ class ColdRoomPdf {
     ], tableElementsCol2: [
       tableEelment(title: "Room internal Volume", value: "${coldRoom.roomInternalVolume} m \u00B3"),
       tableEelment(title: "Cold Room Location ", value: coldRoom.roomLocation),
-      tableEelment(title: "Room temperature ", value: "${coldRoom.roomTemperature} \u2103"),
+      tableEelment(title: "Room temperature ", value: "${coldRoom.roomTemperature} °C"),
       tableEelment(title: "Room RH", value: "${coldRoom.roomRH} %"),
       tableEelment(title: "Door Opening Frequency", value: coldRoom.doorOpenFreq),
     ]);
   }
 
   productDefinotion(pw.Context context) {
-    return tableBox(context: context, heading: "Room Definition", tableElementsCol1: [
+    return tableBox(context: context, heading: "Product Definition", tableElementsCol1: [
       tableEelment(title: "Product", value: "${coldRoom.productProduct} "),
       tableEelment(title: "Product Quantity", value: "${coldRoom.quantity} kg"),
-      tableEelment(title: "Product Storage Density", value: "${coldRoom.storageDensity} kg/m\u00B3 "),
-      tableEelment(title: "Daily Product Loading", value: "${coldRoom.dailyLoadPerc} kg"),
-      tableEelment(title: "Product Incoming Temperature", value: "${coldRoom.productIncTemp} \u2103"),
-      tableEelment(title: "Product Final Temperature", value: "${coldRoom.productFinalTemp} \u2103"),
+      tableEelment(title: "Product Storage \nDensity", value: "${coldRoom.storageDensity} kg/	m \u00B3"),
+      tableEelment(title: "Daily Product \nLoading", value: "${coldRoom.dailyLoadPerc} kg"),
+      tableEelment(title: "Product Incoming \nTemperature", value: "${coldRoom.productIncTemp} °C"),
+      tableEelment(title: "Product Final \nTemperature", value: "${coldRoom.productFinalTemp} °C"),
     ], tableElementsCol2: [
       tableEelment(title: "Product family", value: "${coldRoom.productFamily} "),
-      tableEelment(title: "Specific Heat above Freezing", value: "${coldRoom.specificHeatAboveFrez} kJ/kg\u2103"),
-      tableEelment(title: "Specific Heat below Freezing", value: "${coldRoom.specificHeatBelowFrez} kJ/kg\u2103"),
-      tableEelment(title: "Freezing temp", value: "${coldRoom.freezingTemp} \u2103"),
+      tableEelment(title: "Specific Heat above \nFreezing", value: "${coldRoom.specificHeatAboveFrez} kJ/kg°C"),
+      tableEelment(title: "Specific Heat below \nFreezing", value: "${coldRoom.specificHeatBelowFrez} kJ/kg°C"),
+      tableEelment(title: "Freezing temp", value: "${coldRoom.freezingTemp} °C"),
       tableEelment(title: "Respiraton Heat", value: "${coldRoom.respirationHeat} W/kg*24 h"),
     ]);
   }
@@ -120,8 +122,8 @@ class ColdRoomPdf {
   internalFactors(pw.Context context) {
     return tableBox(context: context, heading: "Internal Factors", tableElementsCol1: [
       tableEelment(title: "No of Workers", value: "${coldRoom.noPersons} "),
-      tableEelment(title: "Total rated power of all motors", value: "${coldRoom.totRatPow} kW"),
-      tableEelment(title: "Lighting", value: "${coldRoom.lighting} W/m\u2102"),
+      tableEelment(title: "Total rated power \nof all motors", value: "${coldRoom.totRatPow} kW"),
+      tableEelment(title: "Lighting", value: "${coldRoom.lighting} W/m°C"),
     ], tableElementsCol2: [
       tableEelment(title: "Working Time", value: "${coldRoom.workingHrs} h"),
       tableEelment(title: "running Time", value: "${coldRoom.motRunHrs} h"),
@@ -138,7 +140,7 @@ class ColdRoomPdf {
     ], tableElementsCol2: [
       tableEelment(title: "Safety Factor", value: "${coldRoom.safetyFactor} %"),
       tableEelment(title: "Cooling Time", value: "${coldRoom.coolingTime} h"),
-      tableEelment(title: "Comperessor Operating time", value: "${coldRoom.compressorOperatingTime} h"),
+      tableEelment(title: "Comperessor Operating \ntime", value: "${coldRoom.compressorOperatingTime} h"),
     ]);
   }
 
@@ -199,7 +201,7 @@ class ColdRoomPdf {
   }) {
     // returnstable element
     return pw.Container(
-      width: 200,
+      width: 220,
       padding: const pw.EdgeInsets.all(8),
       child: pw.Row(
         mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
@@ -214,10 +216,17 @@ class ColdRoomPdf {
   hourlyLoadText({required pw.Context context, required String load}) {
     return pw.Container(
       width: double.maxFinite,
+      padding: const pw.EdgeInsets.all(8),
       child: pw.Row(
         mainAxisAlignment: pw.MainAxisAlignment.end,
         children: [
-          pw.Text("Hourly Equipment Load : $load"),
+          pw.Text(
+            "Hourly Equipment Load : $load",
+            style: pw.TextStyle(
+              fontWeight: pw.FontWeight.bold,
+              fontSize: 15,
+            ),
+          ),
         ],
       ),
     );

@@ -26,8 +26,13 @@ class _LoginTopSectionState extends State<LoginTopSection> {
             duration: const Duration(milliseconds: 500),
             height: MediaQuery.of(context).size.height * height,
             width: MediaQuery.of(context).size.width,
-            color: Colors.lightBlueAccent.shade200,
-            child: Container(),
+            color: Colors.lightBlue.shade100,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Container(
+                decoration: const BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/logo.png'))),
+              ),
+            ),
           ),
         );
       },

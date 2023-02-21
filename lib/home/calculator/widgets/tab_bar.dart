@@ -19,7 +19,8 @@ class _CalculatorTabBarState extends State<CalculatorTabBar> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SizedBox(
+    return Container(
+      color: Colors.white,
       width: size.width,
       height: size.height * 0.07,
       child: Stack(
@@ -40,7 +41,7 @@ class _CalculatorTabBarState extends State<CalculatorTabBar> {
                         },
                       ),
                       child: Container(
-                        color: Colors.white.withOpacity(0.01),
+                        color: Colors.white,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [

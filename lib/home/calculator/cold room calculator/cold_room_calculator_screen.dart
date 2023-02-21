@@ -1,18 +1,13 @@
 import 'dart:developer';
-
 import 'package:bluecold/home/calculator/cold%20room%20calculator/ambient_room_detail.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/data/calculator.dart';
-import 'package:bluecold/home/calculator/cold%20room%20calculator/data/sharedpref_coldroom.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/other_detail.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/product_detail.dart';
-import 'package:bluecold/home/calculator/cold%20room%20calculator/data/products.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/result_screen_coldroom.dart';
 import 'package:bluecold/home/calculator/widgets/tab_bar.dart';
 import 'package:bluecold/home/calculator/widgets/tab_bar_view.dart';
-import 'package:bluecold/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../../utils/screen.dart';
 
 class ColdRoomCalculatorScreen extends StatefulWidget {
@@ -44,7 +39,8 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              Container(
+                color: Colors.white,
                 height: MediaQuery.of(context).size.height * 0.08,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -68,7 +64,15 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
                     Row(
                       children: [
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                              CupertinoPageRoute(
+                                builder: (context) => const ColdRoomCalculatorScreen(),
+                              ),
+                            );
+                            // ColdRoomCalculator().setDefaultValues();
+                            // setState(() {});
+                          },
                           icon: const Icon(
                             Icons.replay_rounded,
                           ),
@@ -105,20 +109,21 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
       height: MediaQuery.of(context).size.height * 0.87,
       width: MediaQuery.of(context).size.width,
       child: SingleChildScrollView(
-        child: Column(children: [
-          CalculatorTabBar(
-            tabs: tabs,
-            currentIndex: currentIndex,
-            onChanged: (p0) {
-              setState(() {
-                pageController.animateToPage(p0, duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
-                Future.delayed(const Duration(milliseconds: 500)).then((value) {
-                  currentIndex = p0;
+        child: Column(
+          children: [
+            CalculatorTabBar(
+              tabs: tabs,
+              currentIndex: currentIndex,
+              onChanged: (p0) {
+                setState(() {
+                  pageController.animateToPage(p0, duration: const Duration(milliseconds: 500), curve: Curves.easeIn);
+                  Future.delayed(const Duration(milliseconds: 500)).then((value) {
+                    currentIndex = p0;
+                  });
                 });
-              });
-            },
-          ),
-          CalculatorTabView(
+              },
+            ),
+            CalculatorTabView(
               currentIndex: currentIndex,
               onPageChanged: (p0) {
                 setState(() {
@@ -126,12 +131,14 @@ class _ColdRoomCalculatorScreenState extends State<ColdRoomCalculatorScreen> {
                 });
               },
               pageController: pageController,
-              views: [
+              views: const [
                 AmbientRoomForm(),
-                const ProductDetail(),
-                const OtherDetail(),
-              ])
-        ]),
+                ProductDetail(),
+                OtherDetail(),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

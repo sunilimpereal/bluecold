@@ -38,11 +38,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               IconButton(
                 onPressed: () {
-                  Navigator.of(context).push(
+                  Navigator.of(context)
+                      .push(
                     CupertinoPageRoute(
                       builder: (context) => const ProfileEditScreen(),
                     ),
-                  );
+                  )
+                      .then((value) {
+                    setState(() {});
+                  });
                 },
                 icon: const Icon(
                   Icons.edit_note,
@@ -118,7 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           detailTile(name: "Phone", detail: sharedPrefs.number, icon: CupertinoIcons.phone_fill),
           detailTile(name: "Email", detail: sharedPrefs.email, icon: CupertinoIcons.mail_solid),
-          detailTile(name: "Address", detail: "Lorem Ipsum sit amet, consectetur elit, sed do incididunt ut", icon: CupertinoIcons.location_solid)
+          detailTile(name: "Address", detail: sharedPrefs.address, icon: CupertinoIcons.location_solid)
         ],
       ),
     );
@@ -132,7 +136,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Icon(icon),
         ],
       ),
-      title: Text(detail),
+      title: detail != ""
+          ? Text(detail)
+          : GestureDetector(
+              onTap: () {
+                Navigator.of(context)
+                    .push(
+                  CupertinoPageRoute(
+                    builder: (context) => const ProfileEditScreen(),
+                  ),
+                )
+                    .then((value) {
+                  setState(() {});
+                });
+              },
+              child: Text(
+                "Add $name",
+                style: const TextStyle(color: Colors.blue),
+              ),
+            ),
       subtitle: Text(name),
     );
   }

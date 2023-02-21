@@ -77,8 +77,8 @@ class BlastRoomPdf {
   }
 
   ambinetDefinition(pw.Context context) {
-    return tableBox(context: context, heading: "Ambinet Definition", tableElementsCol1: [
-      tableEelment(title: "Ambient Temperature", value: "${blastRoom.ambTemp} \u2103"),
+    return tableBox(context: context, heading: "Ambient Definition", tableElementsCol1: [
+      tableEelment(title: "Ambient Temperature", value: "${blastRoom.ambTemp} °C"),
     ], tableElementsCol2: [
       tableEelment(title: "Ambient RH", value: "${blastRoom.ambRH} %"),
     ]);
@@ -94,7 +94,7 @@ class BlastRoomPdf {
     ], tableElementsCol2: [
       tableEelment(title: "Room internal Volume", value: "${blastRoom.roomInternalVolume} m \u00B3"),
       tableEelment(title: "Cold Room Location ", value: blastRoom.roomLocation),
-      tableEelment(title: "Room temperature ", value: "${blastRoom.roomTemperature} \u2103"),
+      tableEelment(title: "Room temperature ", value: "${blastRoom.roomTemperature} °C"),
       tableEelment(title: "Room RH", value: "${blastRoom.roomRH} %"),
       tableEelment(title: "Door Opening Frequency", value: blastRoom.doorOpenFreq),
     ]);
@@ -104,13 +104,13 @@ class BlastRoomPdf {
     return tableBox(context: context, heading: "Room Definition", tableElementsCol1: [
       tableEelment(title: "Product family", value: "${blastRoom.productFamily} "),
       tableEelment(title: "Product", value: "${blastRoom.productProduct} "),
-      tableEelment(title: "Product Incoming Temperature", value: "${blastRoom.productIncTemp} \u2103"),
-      tableEelment(title: "Product Final Temperature", value: "${blastRoom.productFinalTemp} \u2103"),
+      tableEelment(title: "Product Incoming Temperature", value: "${blastRoom.productIncTemp} °C"),
+      tableEelment(title: "Product Final Temperature", value: "${blastRoom.productFinalTemp} °C"),
     ], tableElementsCol2: [
       tableEelment(title: "Respiraton Heat", value: "${blastRoom.respirationHeat} W/kg*24 h"),
-      tableEelment(title: "Specific Heat above Freezing", value: "${blastRoom.specificHeatAboveFreezing} kJ/kg\u2103"),
-      tableEelment(title: "Specific Heat below Freezing", value: "${blastRoom.specificHeatBelowFreezing} kJ/kg\u2103"),
-      tableEelment(title: "Freezing temp", value: "${blastRoom.freezingTemp} \u2103"),
+      tableEelment(title: "Specific Heat above Freezing", value: "${blastRoom.specificHeatAboveFreezing} kJ/kg°C"),
+      tableEelment(title: "Specific Heat below Freezing", value: "${blastRoom.specificHeatBelowFreezing} kJ/kg°C"),
+      tableEelment(title: "Freezing temp", value: "${blastRoom.freezingTemp} °C"),
       tableEelment(title: "Latent Heat of Freeezing", value: "${blastRoom.latentHeatOFFreezing} kJ/kg"),
     ]);
   }
@@ -163,14 +163,16 @@ class BlastRoomPdf {
                     ),
                   ),
                 ),
-                pw.Row(children: [
-                  pw.Column(
-                    children: tableElementsCol1,
-                  ),
-                  pw.Column(
-                    children: tableElementsCol2,
-                  )
-                ])
+                pw.Row(
+                  children: [
+                    pw.Column(
+                      children: tableElementsCol1,
+                    ),
+                    pw.Column(
+                      children: tableElementsCol2,
+                    )
+                  ],
+                )
               ],
             ),
           ),
@@ -185,12 +187,15 @@ class BlastRoomPdf {
   }) {
     // returnstable element
     return pw.Container(
-      width: 200,
+      width: 220,
       padding: const pw.EdgeInsets.all(8),
       child: pw.Row(
         mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
         children: [
-          pw.Text("$title  : "),
+          pw.Container(
+            width: 120,
+            child: pw.Text("$title  : ", overflow: pw.TextOverflow.clip),
+          ),
           pw.Text(value),
         ],
       ),
@@ -200,10 +205,17 @@ class BlastRoomPdf {
   hourlyLoadText({required pw.Context context, required String load}) {
     return pw.Container(
       width: double.maxFinite,
+      padding: const pw.EdgeInsets.all(8),
       child: pw.Row(
         mainAxisAlignment: pw.MainAxisAlignment.end,
         children: [
-          pw.Text("Hourly Equipment Load : $load"),
+          pw.Text(
+            "Hourly Equipment Load : $load",
+            style: pw.TextStyle(
+              fontWeight: pw.FontWeight.bold,
+              fontSize: 15,
+            ),
+          ),
         ],
       ),
     );

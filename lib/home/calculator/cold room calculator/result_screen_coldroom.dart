@@ -25,7 +25,23 @@ class _ColdRoomResultScreenState extends State<ColdRoomResultScreen> {
         body: Center(
           child: Column(
             children: [
-              const CustomAppBar(title: "Heat Load Summary"),
+              CustomAppBar(
+                title: "Heat Load Summary",
+                options: [
+                  IconButton(
+                      onPressed: () {
+                        Navigator.of(context).push(CupertinoPageRoute(
+                            builder: (context) => PdfInputScreen(
+                                  onSubmitted: () {
+                                    ColdRoomPdf().generatePdf();
+                                  },
+                                )));
+                      },
+                      icon: const Icon(
+                        Icons.print,
+                      ))
+                ],
+              ),
               GestureDetector(
                 onLongPressMoveUpdate: (details) {
                   log("message`");

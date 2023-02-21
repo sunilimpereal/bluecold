@@ -151,7 +151,7 @@ class _AmbientRoomFormState extends State<AmbientRoomForm> {
                 ],
               ),
               const SizedBox(
-                height: 100,
+                height: 200,
               )
             ],
           ),

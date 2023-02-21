@@ -85,7 +85,7 @@ class ProductDetailState extends State<ProductDetail> {
               InputTileNumber(
                 title: "Product Incoming Temp",
                 initialValue: sharedPrefColdRoom.productIncTemp,
-                maxValue: 100,
+                maxValue: 50,
                 minValue: 1,
                 gapValue: 5,
                 unit: "°C",
@@ -96,7 +96,7 @@ class ProductDetailState extends State<ProductDetail> {
               InputTileNumber(
                 title: "Product Final Temp",
                 initialValue: sharedPrefColdRoom.productFinalTemp,
-                maxValue: 30,
+                maxValue: 25,
                 minValue: 1,
                 gapValue: 5,
                 unit: "°C",
@@ -107,7 +107,7 @@ class ProductDetailState extends State<ProductDetail> {
               InputTileNumber(
                 title: "Cooling time",
                 initialValue: sharedPrefColdRoom.coolingTime,
-                maxValue: 300,
+                maxValue: 30,
                 minValue: 1,
                 gapValue: 5,
                 unit: "hrs",
@@ -116,6 +116,9 @@ class ProductDetailState extends State<ProductDetail> {
                 },
               ),
             ],
+          ),
+          const SizedBox(
+            height: 100,
           )
         ],
       ),
