@@ -32,8 +32,11 @@ class _ColdRoomResultScreenState extends State<ColdRoomResultScreen> {
                       onPressed: () {
                         Navigator.of(context).push(CupertinoPageRoute(
                             builder: (context) => PdfInputScreen(
-                                  onSubmitted: () {
+                                  ongeneratePdf: () {
                                     ColdRoomPdf().generatePdf();
+                                  },
+                                  onSharePdf: () {
+                                    ColdRoomPdf().sharePdf();
                                   },
                                 )));
                       },
@@ -126,8 +129,11 @@ class _ColdRoomResultScreenState extends State<ColdRoomResultScreen> {
             onPressed: () {
               Navigator.of(context).push(CupertinoPageRoute(
                   builder: (context) => PdfInputScreen(
-                        onSubmitted: () {
+                        ongeneratePdf: () {
                           ColdRoomPdf().generatePdf();
+                        },
+                        onSharePdf: () {
+                          ColdRoomPdf().sharePdf();
                         },
                       )));
             },

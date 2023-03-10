@@ -129,7 +129,7 @@ class _InputTileOptionState extends State<InputTileOption> {
               // scroll selector
               trailing: Container(
                 height: 33,
-                width: MediaQuery.of(context).size.width * 0.35,
+                width: MediaQuery.of(context).size.width * 0.36,
                 alignment: Alignment.centerRight,
                 child: CupertinoPicker(
                   key: _key,
@@ -155,7 +155,7 @@ class _InputTileOptionState extends State<InputTileOption> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.33,
+        width: MediaQuery.of(context).size.width * 0.36,
         child: Text(
           text,
           overflow: TextOverflow.clip,
@@ -167,17 +167,43 @@ class _InputTileOptionState extends State<InputTileOption> {
   }
 
   Widget dropDown() {
-    return Column(
-        children: widget.options.map((e) {
-      return ListTile(
-        title: Text(e),
-        onTap: () {
-          closeMenu();
-          widget.onChanged!(e);
-          scrollController.animateToItem(widget.options.indexOf(e), duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
-          setState(() {});
-        },
-      );
-    }).toList());
+    return widget.options.length < 4
+        ? Column(
+            children: widget.options.map((e) {
+            return ListTile(
+              title: Text(e),
+              onTap: () {
+                closeMenu();
+                widget.onChanged!(e);
+                scrollController.animateToItem(widget.options.indexOf(e), duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+                setState(() {});
+              },
+            );
+          }).toList())
+        : Container(
+            height: MediaQuery.of(context).size.height / 3,
+            width: MediaQuery.of(context).size.width / 3,
+            child: SingleChildScrollView(
+              child: Column(
+                  children: widget.options.map((e) {
+                return ListTile(
+                  contentPadding: EdgeInsets.symmetric(
+                    horizontal: 7,
+                  ),
+                  title: Text(
+                    e,
+                    overflow: TextOverflow.clip,
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  onTap: () {
+                    closeMenu();
+                    widget.onChanged!(e);
+                    scrollController.animateToItem(widget.options.indexOf(e), duration: const Duration(milliseconds: 300), curve: Curves.easeIn);
+                    setState(() {});
+                  },
+                );
+              }).toList()),
+            ),
+          );
   }
 }

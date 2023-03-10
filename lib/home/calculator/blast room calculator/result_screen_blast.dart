@@ -39,8 +39,11 @@ class _BlastRoomResultScreenState extends State<BlastRoomResultScreen> {
                       onPressed: () {
                         Navigator.of(context).push(CupertinoPageRoute(
                             builder: (context) => PdfInputScreen(
-                                  onSubmitted: () {
+                                  ongeneratePdf: () {
                                     BlastRoomPdf().generatePdf();
+                                  },
+                                  onSharePdf: () {
+                                    BlastRoomPdf().sharePdf();
                                   },
                                 )));
                       },

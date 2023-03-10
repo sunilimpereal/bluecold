@@ -7,8 +7,9 @@ import '../../../../utils/screen.dart';
 import 'cold_room_pdf.dart';
 
 class PdfInputScreen extends StatefulWidget {
-  final Function onSubmitted;
-  const PdfInputScreen({super.key, required this.onSubmitted});
+  final Function ongeneratePdf;
+  final Function onSharePdf;
+  const PdfInputScreen({super.key, required this.ongeneratePdf, required this.onSharePdf});
 
   @override
   State<PdfInputScreen> createState() => _PdfInputScreenState();
@@ -96,7 +97,7 @@ class _PdfInputScreenState extends State<PdfInputScreen> {
                     Container(
                       padding: const EdgeInsets.all(8),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           ElevatedButton(
                             onPressed: () {
@@ -108,7 +109,23 @@ class _PdfInputScreenState extends State<PdfInputScreen> {
                                   emailId: emailIdController.text,
                                 );
                                 Future.delayed(const Duration(milliseconds: 100));
-                                widget.onSubmitted();
+                                widget.onSharePdf();
+                                // ColdRoomPdf().generatePdf();
+                              }
+                            },
+                            child: const Text("Share PDF"),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                sharedPref.setPdfInputs(
+                                  customer: customerController.text,
+                                  jobReference: jobReferenceController.text,
+                                  roomName: roomNameController.text,
+                                  emailId: emailIdController.text,
+                                );
+                                Future.delayed(const Duration(milliseconds: 100));
+                                widget.ongeneratePdf();
                                 // ColdRoomPdf().generatePdf();
                               }
                             },
