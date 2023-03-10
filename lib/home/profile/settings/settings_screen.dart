@@ -2,6 +2,7 @@ import 'package:bluecold/home/profile/settings/disclaimer_screen.dart';
 import 'package:bluecold/home/profile/widgets/app_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../utils/screen.dart';
 
@@ -24,18 +25,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
               children: [
                 settingsTile(
                     ontap: () {
-                      Navigator.of(context).push(
-                        CupertinoPageRoute(
-                          builder: (context) => const DisclaimerScreen(),
-                        ),
-                      );
+                      _launchUrl(url: "https://www.bluecoldref.com/company/about-us");
+                      // Navigator.of(context).push(
+                      //   CupertinoPageRoute(
+                      //     builder: (context) => const DisclaimerScreen(),
+                      //   ),
+                      // );
                     },
                     icon: Icons.rule_rounded,
-                    title: "Disclaimer"),
+                    title: "About Us"),
                 settingsTile(
-                  ontap: () {},
+                  ontap: () {
+                    _launchUrl(url: "https://www.bluecoldref.com/company/contact-us");
+                  },
                   icon: Icons.info,
-                  title: "About Us",
+                  title: "Contact Us",
                 )
               ],
             )
@@ -43,6 +47,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
       ),
     );
+  }
+
+  Future<void> _launchUrl({required String url}) async {
+    if (!await launchUrl(Uri.parse(url), mode: LaunchMode.externalApplication)) {
+      throw Exception('Could not launch $url');
+    }
   }
 
   ListTile settingsTile({

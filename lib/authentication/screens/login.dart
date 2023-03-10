@@ -160,14 +160,14 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               Text(
                 !isVerfyNumber ? "Login" : "Verify Number",
-                style: TextStyle(
+                style: const TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 8,
               ),
-              Icon(Icons.keyboard_arrow_right_rounded)
+              const Icon(Icons.keyboard_arrow_right_rounded)
             ],
           ),
         ),
