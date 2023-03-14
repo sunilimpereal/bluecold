@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:bluecold/home/calculator/blast%20room%20calculator/data/sharedpref_bastroom.dart';
 import 'package:bluecold/home/calculator/cold%20room%20calculator/data/sharedpref_coldroom.dart';
 import 'package:bluecold/main.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_share/flutter_share.dart';
 import 'package:open_file/open_file.dart';
 import 'package:pdf/pdf.dart';
@@ -11,8 +12,12 @@ import 'package:path_provider/path_provider.dart';
 
 class BlastRoomPdf {
   final doc = pw.Document();
+  late final image;
   SharedPrefBlastRoom blastRoom = sharedPrefBlastRoom;
-  createPage() {
+  createPage() async {
+    image = pw.MemoryImage(
+      (await rootBundle.load('assets/images/logo.png')).buffer.asUint8List(),
+    );
     //to create pages
     doc.addPage(
       pw.MultiPage(
@@ -37,10 +42,11 @@ class BlastRoomPdf {
   }
 
   generatePdf() async {
-    createPage();
+    await createPage();
+
     final directory = await getApplicationSupportDirectory();
     final path = directory.path;
-    final file = File("$path/${sharedPref.company}.pdf");
+    final file = File("$path/${sharedPref.customer}.pdf");
     File f = await file.writeAsBytes(await doc.save());
     OpenFile.open(f.path);
     log(f.path);
@@ -50,7 +56,7 @@ class BlastRoomPdf {
     createPage();
     final directory = await getApplicationSupportDirectory();
     final path = directory.path;
-    final file = File("$path/${sharedPref.company}.pdf");
+    final file = File("$path/${sharedPref.customer}.pdf");
     File f = await file.writeAsBytes(await doc.save());
     await FlutterShare.shareFile(
       title: 'Example share',
@@ -62,19 +68,28 @@ class BlastRoomPdf {
   }
 
   _contentHeader(pw.Context context) {
-    return pw.Column(children: [
-      pw.Row(mainAxisAlignment: pw.MainAxisAlignment.end, children: [
-        pw.Container(
-          child: pw.Column(
+    return pw.Padding(
+      padding: pw.EdgeInsets.all(8),
+      child: pw.Column(
+        children: [
+          pw.Row(
+            mainAxisAlignment: pw.MainAxisAlignment.spaceBetween,
             children: [
-              pw.Text(sharedPref.company),
-              pw.Text(sharedPref.email),
-              pw.Text(sharedPref.number),
+              pw.Container(width: 100, child: pw.Image(image)),
+              pw.Container(
+                child: pw.Column(
+                  children: [
+                    pw.Text(sharedPref.company),
+                    pw.Text(sharedPref.email),
+                    pw.Text(sharedPref.number),
+                  ],
+                ),
+              )
             ],
-          ),
-        )
-      ])
-    ]);
+          )
+        ],
+      ),
+    );
   }
 
   projectDetail(pw.Context context) {
